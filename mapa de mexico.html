@@ -1,0 +1,1116 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>México: Rediseñando la Cartografía de la Supervivencia (1821–1893)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&family=Bangers&family=Press+Start+2P&display=swap">
+<style>
+/* ===== Tokens de color (tema claro por defecto) ===== */
+:root{
+  --bg:#e8eef2; --paper:#ffffff; --ink:#14213d; --muted:#4b5a76; --line:#c5d0dc;
+  --accent:#ff5a36; --yellow:#ffc933; --teal:#0f9aa8; --navy:#1d2b53; --sea:#d3e8f0; --land:#e6e0cf;
+  --halftone:rgba(20,33,61,.13);
+  --c-mx:#0f9aa8; --c-sur:#79cdd4; --c-mxnew:#ffc933; --c-lost:#e5483b;
+  --c-usa:#8f9bb3; --c-other:#bcc2cd; --c-tex:#8e6fd1; --c-glitch:#ff8a3d;
+  --font-body:"Atkinson Hyperlegible",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+  --font-comic:"Bangers","Impact","Arial Narrow",sans-serif;
+  --font-hud:"Press Start 2P","Courier New",monospace;
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px);
+  padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --bg:#0e1730; --paper:#18244a; --ink:#eef2fb; --muted:#a9b5d0; --line:#2c3b66;
+    --sea:#12224a; --land:#26335f; --halftone:rgba(255,255,255,.07); --navy:#0a1128;
+    --c-mx:#19b3c2; --c-sur:#5fb6bd; --c-mxnew:#ffcf45; --c-lost:#f0594b;
+    --c-usa:#66748f; --c-other:#6b7385; --c-tex:#a68be0; --c-glitch:#ff9a52;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#0e1730; --paper:#18244a; --ink:#eef2fb; --muted:#a9b5d0; --line:#2c3b66;
+  --sea:#12224a; --land:#26335f; --halftone:rgba(255,255,255,.07); --navy:#0a1128;
+  --c-mx:#19b3c2; --c-sur:#5fb6bd; --c-mxnew:#ffcf45; --c-lost:#f0594b;
+  --c-usa:#66748f; --c-other:#6b7385; --c-tex:#a68be0; --c-glitch:#ff9a52;
+}
+html{scroll-padding-top:calc(env(safe-area-inset-top,0px) + 56px);scroll-behavior:smooth}
+*,*::before,*::after{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--font-body);font-size:17px;line-height:1.55;
+  background-image:radial-gradient(var(--halftone) 1.2px,transparent 1.2px);background-size:18px 18px}
+h1,h2,h3,p{margin:0}
+button{font:inherit;color:inherit;cursor:pointer}
+:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+svg *:focus{outline:none}
+.wrap{max-width:1040px;margin:0 auto;padding:0 16px}
+
+/* ===== Barra superior ===== */
+.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:30;background:var(--navy);color:#fff;border-bottom:3px solid var(--ink)}
+.top .in{max-width:1040px;margin:0 auto;padding:8px 16px;display:flex;align-items:center;gap:12px;justify-content:space-between}
+.brand{font-family:var(--font-comic);font-size:22px;letter-spacing:.04em;color:var(--yellow)}
+.links{display:flex;gap:6px;align-items:center}
+.links a{color:#fff;text-decoration:none;padding:6px 10px;border-radius:8px;font-size:15px}
+.links a:hover{background:rgba(255,255,255,.14)}
+#theme{background:transparent;border:2px solid #fff;color:#fff;border-radius:50%;width:34px;height:34px;line-height:1}
+
+/* ===== Portada ===== */
+.hero{padding:34px 0 30px}
+.cover{position:relative;background:var(--yellow);border:4px solid var(--ink);border-radius:6px;box-shadow:9px 9px 0 var(--ink);
+  padding:26px 20px 24px;color:#14213d;overflow:hidden;
+  background-image:radial-gradient(rgba(20,33,61,.18) 2px,transparent 2px);background-size:14px 14px}
+.cover .kicker{font-family:var(--font-hud);font-size:10px;line-height:1.7;background:var(--navy);color:#fff;display:inline-block;
+  padding:7px 10px;border:3px solid var(--ink);transform:rotate(-1.5deg)}
+.cover h1{font-family:var(--font-comic);font-weight:400;font-size:clamp(38px,9vw,78px);line-height:.98;letter-spacing:.015em;margin:16px 0 8px;text-shadow:3px 3px 0 #fff}
+.cover h1 small{display:block;font-size:.55em;color:var(--accent);text-shadow:2px 2px 0 #fff;margin-top:6px}
+.bubble-lead{position:relative;background:#fff;border:3px solid var(--ink);border-radius:18px;padding:12px 16px;max-width:580px;font-size:17px;margin-top:18px}
+.bubble-lead::after{content:"";position:absolute;left:34px;top:-16px;border:9px solid transparent;border-bottom:16px solid var(--ink)}
+.stats{display:flex;flex-wrap:wrap;gap:10px;margin-top:18px}
+.stats span{background:#fff;border:3px solid var(--ink);padding:5px 11px;font-weight:700;font-size:15px;border-radius:999px}
+.go-btn{margin-top:20px;display:inline-block;background:var(--accent);color:#fff;border:3px solid var(--ink);box-shadow:4px 4px 0 var(--ink);
+  padding:11px 20px;font-family:var(--font-comic);font-size:25px;letter-spacing:.05em;text-decoration:none;border-radius:6px}
+.go-btn:active{transform:translate(3px,3px);box-shadow:1px 1px 0 var(--ink)}
+
+/* ===== Secciones ===== */
+section.blk{padding:30px 0 6px}
+.sec-h{display:flex;align-items:center;gap:12px;margin-bottom:14px}
+.sec-h h2{font-family:var(--font-comic);font-weight:400;font-size:clamp(30px,6vw,44px);letter-spacing:.03em;line-height:1}
+.intro{color:var(--muted);max-width:68ch;margin-bottom:16px}
+.card{background:var(--paper);border:3px solid var(--ink);border-radius:10px;box-shadow:5px 5px 0 var(--ink);padding:14px}
+.seg{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:12px}
+.seg button{background:var(--paper);border:3px solid var(--ink);border-radius:8px;padding:7px 14px;font-weight:700}
+.seg button[aria-pressed="true"]{background:var(--yellow);color:#14213d;box-shadow:3px 3px 0 var(--ink)}
+.duo{display:grid;gap:12px;grid-template-columns:1fr}
+@media(min-width:680px){.duo{grid-template-columns:1fr 1fr}}
+.side{border:3px solid var(--ink);border-radius:8px;padding:12px 14px;background:var(--bg)}
+.side h3{font-family:var(--font-comic);font-weight:400;font-size:24px;letter-spacing:.04em;margin-bottom:4px}
+.side.us{border-left:12px solid var(--c-usa)}
+.side.mx{border-left:12px solid var(--c-mx)}
+.sub-h{font-weight:700;margin:0 0 8px;font-size:19px}
+
+/* ===== Atlas ===== */
+.hud{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:10px}
+.hud .lvl{font-family:var(--font-hud);font-size:10px;background:var(--navy);color:var(--yellow);padding:8px 10px;border:3px solid var(--ink);border-radius:4px}
+.segs{display:flex;gap:3px;flex:1;min-width:140px}
+.segs i{flex:1;height:14px;background:var(--line);border:2px solid var(--ink);transition:background .3s}
+.segs i.on{background:var(--accent)}
+.tl{position:relative;display:flex;gap:8px;overflow-x:auto;padding:4px 2px 12px;scrollbar-width:thin}
+.chip{flex:0 0 auto;background:var(--paper);border:3px solid var(--ink);border-radius:8px;padding:8px 11px;font-family:var(--font-hud);font-size:9px;line-height:1.4}
+.chip[aria-current="true"]{background:var(--accent);color:#fff;box-shadow:3px 3px 0 var(--ink)}
+.stage{background:var(--sea);border:3px solid var(--ink);border-radius:10px;box-shadow:5px 5px 0 var(--ink);overflow:hidden;position:relative}
+.mapscroll{overflow-x:auto;-webkit-overflow-scrolling:touch}
+#map{display:block;width:100%;height:auto;touch-action:manipulation}
+@media(max-width:700px){#map{min-width:640px}}
+.land{fill:var(--land)}
+.reg{stroke:var(--paper);stroke-width:1.4;stroke-linejoin:round;transition:fill .6s ease,opacity .6s ease}
+.reg.click{cursor:pointer}
+.reg.nopt{pointer-events:none}
+.reg.ov{stroke:var(--ink);stroke-width:2;stroke-dasharray:6 3}
+.reg.click:hover{opacity:.88}
+.s-mx{fill:var(--c-mx)} .s-sur{fill:var(--c-sur)} .s-mxnew{fill:var(--c-mxnew)} .s-lost{fill:var(--c-lost)}
+.s-usa{fill:var(--c-usa)} .s-other{fill:var(--c-other)} .s-tex{fill:var(--c-tex)} .s-glitch{fill:var(--c-glitch)}
+.s-merged{fill:var(--c-mx);stroke:var(--c-mx)}
+.s-dispute{fill:url(#pDispute)}
+.s-hidden{display:none}
+#pieces,#zones{filter:drop-shadow(0 4px 0 rgba(20,33,61,.35))}
+/* capa de estados modernos: bordes finos y clic */
+.st{fill:rgba(255,255,255,.001);stroke:rgba(10,17,40,.5);stroke-width:1;stroke-linejoin:round;cursor:pointer}
+.st:hover{fill:rgba(255,255,255,.28)}
+.st.no{stroke:rgba(255,255,255,.85);stroke-dasharray:3 3}
+.hlo{fill:none;stroke:var(--ink);stroke-width:8;stroke-linejoin:round;pointer-events:none}
+.hli{fill:rgba(255,255,255,.32);stroke:#fff;stroke-width:3.5;stroke-linejoin:round;pointer-events:none;filter:drop-shadow(0 0 5px #fff)}
+.lab{font-family:var(--font-body);font-weight:700;fill:#fff;stroke:rgba(10,17,40,.75);stroke-width:3.2px;paint-order:stroke;pointer-events:none;text-anchor:middle}
+.lab.sm{stroke-width:2.6px}
+.stk-t{font-family:var(--font-comic);fill:#fff;font-size:21px;letter-spacing:.04em;text-anchor:middle;pointer-events:none}
+.pin{cursor:pointer}
+.pin .dot{fill:var(--paper)}
+.pin .rim{fill:none;stroke:var(--ink);stroke-width:3.5}
+.pin:focus-visible .rim{stroke:var(--accent);stroke-width:6}
+.pin .ring{fill:none;stroke:var(--accent);stroke-width:4;transform-box:fill-box;transform-origin:center;animation:pulse 1.9s ease-out infinite}
+@keyframes pulse{0%{transform:scale(1);opacity:.95}100%{transform:scale(1.9);opacity:0}}
+.maptools{padding:8px 12px;background:var(--paper);border-top:3px solid var(--ink);display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.maptools button{background:var(--paper);border:3px solid var(--ink);border-radius:8px;padding:4px 12px;font-weight:700;font-size:14px}
+.maptools button[aria-pressed="true"]{background:var(--yellow);color:#14213d}
+.tip{padding:12px 14px;background:var(--paper);border-top:3px solid var(--ink);min-height:70px;font-size:16px;line-height:1.45}
+.tip b{font-family:var(--font-comic);font-weight:400;font-size:24px;letter-spacing:.03em}
+.chip2{display:inline-block;margin-left:8px;padding:1px 10px;border:2px solid var(--ink);border-radius:999px;font-size:13px;font-weight:700;vertical-align:middle}
+.chip2.yes{background:var(--c-mx);color:#fff}
+.chip2.no{background:var(--c-mxnew);color:#14213d}
+.chip2.lost{background:var(--c-lost);color:#fff}
+.chip2.usa{background:var(--c-usa);color:#fff}
+.tp{display:block;margin-top:4px}
+.legend{display:flex;flex-wrap:wrap;gap:6px 14px;padding:10px 12px;background:var(--paper);border-top:3px solid var(--ink);font-size:14px}
+.legend span{display:inline-flex;align-items:center;gap:6px}
+.legend i{width:16px;height:16px;border:2px solid var(--ink);border-radius:3px;display:inline-block}
+.cap-map{padding:8px 12px;font-size:14px;color:var(--muted);background:var(--paper);border-top:3px solid var(--ink)}
+.subs{display:flex;gap:8px;flex-wrap:wrap;margin:12px 0 0}
+.subs button{background:var(--paper);border:3px solid var(--ink);border-radius:8px;padding:6px 14px;font-weight:700}
+.subs button[aria-pressed="true"]{background:var(--yellow);color:#14213d;box-shadow:3px 3px 0 var(--ink)}
+
+.scene{margin-top:16px}
+.badge{display:inline-block;border:3px solid var(--ink);border-radius:999px;padding:3px 12px;font-weight:700;font-size:14px;margin-bottom:8px}
+.b-est{background:#b9c8ee;color:#14213d} .b-ext{background:var(--c-lost);color:#fff}
+.b-int{background:var(--c-mxnew);color:#14213d} .b-pac{background:var(--c-mx);color:#fff}
+.scene h3{font-family:var(--font-comic);font-weight:400;font-size:clamp(28px,5.5vw,40px);letter-spacing:.03em;line-height:1.05;margin-bottom:8px}
+.gamebadge{font-family:var(--font-hud);font-size:9px;color:var(--muted);margin-bottom:6px;display:block}
+.sc-text{max-width:70ch}
+.note{margin-top:12px;border:3px solid var(--ink);border-radius:8px;padding:10px 12px;background:var(--bg)}
+.note b{font-family:var(--font-comic);font-weight:400;letter-spacing:.04em;font-size:20px;display:block}
+.note.dec{border-left:12px solid var(--accent)}
+.note.crit{border-left:12px solid var(--yellow)}
+.chars{margin-top:14px}
+.chars p{font-weight:700;margin-bottom:8px}
+.charbtns{display:flex;flex-wrap:wrap;gap:8px}
+.charbtns button{display:inline-flex;align-items:center;gap:8px;background:var(--yellow);color:#14213d;border:3px solid var(--ink);
+  border-radius:999px;padding:5px 14px 5px 5px;font-weight:700;box-shadow:3px 3px 0 var(--ink)}
+.charbtns button .e{width:36px;height:36px;border:2px solid var(--ink);border-radius:50%;overflow:hidden;background:#fff;display:block}
+.charbtns button:active{transform:translate(2px,2px);box-shadow:1px 1px 0 var(--ink)}
+.pt{display:block;width:100%;height:100%}
+.nav2{display:flex;justify-content:space-between;gap:10px;margin-top:16px}
+.nav2 button{background:var(--navy);color:#fff;border:3px solid var(--ink);border-radius:8px;padding:10px 16px;font-weight:700;box-shadow:3px 3px 0 var(--ink)}
+.nav2 button:disabled{opacity:.4;cursor:not-allowed;box-shadow:none}
+
+/* ===== Hoja de cómic ===== */
+.sheet{position:fixed;inset:0;z-index:60;display:none}
+.sheet.open{display:block}
+.sheet-back{position:absolute;inset:0;background:rgba(10,17,40,.62)}
+.sheet-card{position:absolute;left:0;right:0;bottom:0;max-height:92%;overflow-y:auto;background:var(--paper);border:4px solid var(--ink);border-bottom:0;
+  border-radius:18px 18px 0 0;padding:16px 14px calc(18px + env(safe-area-inset-bottom,0px));animation:up .28s ease-out}
+@media(min-width:760px){
+  .sheet-card{left:50%;right:auto;bottom:auto;top:50%;width:min(900px,92vw);transform:translate(-50%,-50%);max-height:88vh;border-bottom:4px solid var(--ink);
+    border-radius:14px;box-shadow:9px 9px 0 var(--ink);animation:none}
+}
+@keyframes up{from{transform:translateY(40px);opacity:0}to{transform:none;opacity:1}}
+.x{position:sticky;top:0;float:right;z-index:2;background:var(--accent);color:#fff;border:3px solid var(--ink);border-radius:50%;width:38px;height:38px;font-weight:700;margin-left:8px}
+.ch-h{display:flex;gap:12px;align-items:center;margin-bottom:8px}
+.ch-h .big{flex:0 0 auto;width:78px;height:78px;border:4px solid var(--ink);border-radius:50%;overflow:hidden;background:#fff}
+.ch-h h3{font-family:var(--font-comic);font-weight:400;font-size:32px;letter-spacing:.04em;line-height:1}
+.ch-h p{color:var(--muted);font-size:15px}
+.whob{display:inline-block;border:2px solid var(--ink);border-radius:999px;padding:1px 10px;font-size:13px;font-weight:700;margin:6px 0 10px}
+.whob.real{background:var(--c-mx);color:#fff}
+.whob.fic{background:var(--yellow);color:#14213d}
+.fine{font-size:13px;color:var(--muted);margin-top:12px}
+.comic{display:grid;gap:12px;grid-template-columns:1fr}
+@media(min-width:760px){.comic{grid-template-columns:1fr 1fr}.comic .panel:first-child:nth-last-child(odd){grid-column:1/-1}}
+.panel{position:relative;border:3px solid var(--ink);background:var(--bg);padding:12px;min-height:120px;display:flex;flex-direction:column;gap:10px;justify-content:center;
+  background-image:radial-gradient(var(--halftone) 1.6px,transparent 1.6px);background-size:11px 11px;animation:pop .35s ease-out both}
+.panel:nth-child(2){animation-delay:.08s}.panel:nth-child(3){animation-delay:.16s}.panel:nth-child(4){animation-delay:.24s}
+@keyframes pop{from{transform:translateY(10px);opacity:0}to{transform:none;opacity:1}}
+.cap{align-self:flex-start;background:var(--yellow);color:#14213d;border:3px solid var(--ink);padding:6px 10px;font-size:16px;max-width:96%}
+.say{display:flex;gap:8px;align-items:flex-end}
+.say .av{flex:0 0 auto;width:48px;height:48px;border:3px solid var(--ink);border-radius:50%;overflow:hidden;background:#fff}
+.say .bub{position:relative;background:#fff;color:#14213d;border:3px solid var(--ink);border-radius:16px;padding:8px 12px;font-size:16px}
+.say .bub::before{content:"";position:absolute;left:-13px;bottom:10px;border:8px solid transparent;border-right:12px solid var(--ink)}
+.say .bub::after{content:"";position:absolute;left:-8px;bottom:12px;border:6px solid transparent;border-right:9px solid #fff}
+.say .bub b{display:block;font-size:14px;color:var(--accent)}
+.fx{align-self:flex-end;font-family:var(--font-comic);font-size:28px;letter-spacing:.05em;color:#fff;background:var(--accent);
+  border:3px solid var(--ink);padding:0 12px;transform:rotate(-4deg);box-shadow:3px 3px 0 var(--ink)}
+.cnav{display:flex;justify-content:space-between;gap:8px;margin-top:14px}
+.cnav button{background:var(--navy);color:#fff;border:3px solid var(--ink);border-radius:8px;padding:8px 14px;font-weight:700}
+
+/* ===== Juego ===== */
+.game .q{font-family:var(--font-comic);font-size:clamp(26px,5vw,36px);letter-spacing:.03em;line-height:1.1}
+.game .yr{font-family:var(--font-hud);font-size:10px;color:var(--muted)}
+.game .ans{display:grid;gap:10px;margin-top:14px}
+@media(min-width:560px){.game .ans{grid-template-columns:1fr 1fr}}
+.game .ans button{border:3px solid var(--ink);border-radius:8px;padding:12px;font-weight:700;font-size:17px;box-shadow:4px 4px 0 var(--ink)}
+.game .ans .e{background:var(--c-lost);color:#fff}.game .ans .i{background:var(--c-mxnew);color:#14213d}
+.game .ans button:disabled{opacity:.55;box-shadow:none}
+.fb{margin-top:12px;border:3px solid var(--ink);border-radius:8px;padding:10px 12px}
+.fb.ok{background:#bdeccd;color:#0f3a22}.fb.no{background:#ffd3cc;color:#5a1409}
+.fb button{margin-top:8px;background:var(--navy);color:#fff;border:3px solid var(--ink);border-radius:8px;padding:8px 14px;font-weight:700}
+.score{font-family:var(--font-hud);font-size:10px;margin-bottom:10px}
+
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  .pin .ring,.panel,.sheet-card{animation:none}
+  .reg{transition:none}
+}
+</style>
+</head>
+<body>
+
+<div class="top"><div class="in">
+  <span class="brand">Atlas 1821–1893</span>
+  <div class="links">
+    <a href="#precuela">Precuela</a><a href="#atlas">Atlas</a><a href="#juego">Juego</a>
+    <button id="theme" aria-label="Cambiar entre tema claro y oscuro">◐</button>
+  </div>
+</div></div>
+
+<header class="hero"><div class="wrap">
+  <div class="cover">
+    <span class="kicker">CONCIENCIA HISTÓRICA II<br>PROYECTO INTEGRADOR</span>
+    <h1>México: Rediseñando la Cartografía de la Supervivencia<small>1821 – 1893</small></h1>
+    <div class="bubble-lead">Atlas histórico de México, descubre la historia de lo que paso en cada estado y en México. Avanza por 10 niveles, toca los 32 estados del mapa y conoce a quienes tomaron decisiones mientras las fronteras se movían.</div>
+    <div class="stats"><span>10 niveles</span><span>32 estados</span><span id="nch"></span></div>
+    <a class="go-btn" href="#atlas">¡Comenzar el atlas!</a>
+  </div>
+</div></header>
+
+<main class="wrap">
+
+<!-- ================= PRECUELA ================= -->
+<section class="blk" id="precuela">
+  <div class="sec-h"><h2>Precuela: historia de dos independencias</h2></div>
+  <p class="intro">Para entender por qué el mapa de México colapsó ante el del vecino, hay que mirar el origen de ambos países. Toca los botones para comparar.</p>
+
+  <div class="card">
+    <div class="sub-h">Frente a frente: el origen del sistema (1607–1808)</div>
+    <div class="seg" id="segF"></div>
+    <div class="duo" id="duoF"></div>
+  </div>
+
+  <div class="card" style="margin-top:16px">
+    <div class="sub-h">Destinos cruzados: la ventaja temporal</div>
+    <div class="seg" id="segD"></div>
+    <div class="duo" id="duoD"></div>
+  </div>
+
+  <div class="card" style="margin-top:16px">
+    <div class="sub-h">Distintos sujetos, distintos ritmos</div>
+    <div class="duo">
+      <div class="side us"><h3>Norteamérica, 1776</h3><p>Conducido por una élite colonial que ya se autogobernaba de facto. Proceso concentrado, basado en el derecho natural y los contratos sociales.</p></div>
+      <div class="side mx"><h3>México, 1810–1821</h3><p>Iniciado por una base popular (indígenas, mestizos) excluida de todo gobierno y liderada por un cura. Proceso itinerante y largo, con sedes alternas, consumado al final por una élite asustada (Plan de Iguala).</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= ATLAS ================= -->
+<section class="blk" id="atlas">
+  <div class="sec-h"><h2>El atlas que se mueve</h2></div>
+  <p class="intro">Avanza por la línea de tiempo y mira cómo cambian las piezas. Toca cualquier estado para leer su historia en este periodo; toca los retratos que laten para conocer a los personajes del nivel.</p>
+
+  <div class="hud"><span class="lvl" id="lvl">NIVEL 1/10</span><div class="segs" id="segs"></div></div>
+  <div class="tl" id="tl" role="tablist" aria-label="Línea de tiempo"></div>
+
+  <div class="stage">
+    <div class="mapscroll" id="mapscroll"><svg id="map" viewBox="0 0 820 670" role="img" aria-label="Mapa esquemático de México y sus vecinos que cambia con cada nivel">
+      <defs>
+        <pattern id="pDispute" width="14" height="14" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
+          <rect width="14" height="14" fill="#0f9aa8"/><rect width="7" height="14" fill="#ff8a3d"/>
+        </pattern>
+        <pattern id="pWave" width="40" height="20" patternUnits="userSpaceOnUse">
+          <path d="M0 10 Q10 4 20 10 T40 10" fill="none" stroke="rgba(20,33,61,.12)" stroke-width="2"/>
+        </pattern>
+        <clipPath id="cpCirc"><circle cx="50" cy="50" r="49"/></clipPath>
+      </defs>
+      <rect width="820" height="670" fill="url(#pWave)"/>
+      <polygon id="bg" class="land"/>
+      <g id="pieces"></g>
+      <g id="states"></g>
+      <g id="zones"></g>
+      <g id="hl"></g>
+      <g id="labs"></g>
+      <g id="stks"></g>
+      <g id="pins"></g>
+    </svg></div>
+    <div class="maptools"><button id="tgNames" aria-pressed="true">Nombres de estados: sí</button></div>
+    <div class="tip" id="tip">Toca un estado del mapa para leer su historia en este periodo.</div>
+    <div class="legend" id="legend"></div>
+    <div class="cap-map">‎ </div>
+  </div>
+
+  <div class="subs" id="subs"></div>
+  <div class="scene card" id="scene"></div>
+  <div class="nav2"><button id="prev">◀ Nivel anterior</button><button id="next">Siguiente nivel ▶</button></div>
+</section>
+
+<!-- ================= JUEGO ================= -->
+<section class="blk" id="juego">
+  <div class="sec-h"><h2>Piezas en juego</h2></div>
+  <p class="intro">¿Se perdió territorio por presión de una potencia extranjera, o fue el propio gobierno reacomodando piezas para gobernar mejor? Clasifica cada evento.</p>
+  <div class="card game" id="game"></div>
+</section>
+
+<div style="height:40px"></div>
+</main>
+
+<!-- Hoja de cómic -->
+<div class="sheet" id="sheet" role="dialog" aria-modal="true" aria-label="Cómic del personaje">
+  <div class="sheet-back" data-close></div>
+  <div class="sheet-card"><button class="x" data-close aria-label="Cerrar">✕</button><div id="sheetBody"></div></div>
+</div>
+
+<script>
+/* =====================================================
+   GEOGRAFÍA: proyección lon/lat -> coordenadas del SVG
+   ===================================================== */
+const proj = ([lo,la]) => ((lo+125)*20.76).toFixed(1)+","+((42-la)*22.9).toFixed(1);
+const P = (lo,la) => [Math.round((lo+125)*20.76), Math.round((42-la)*22.9)];
+
+/* Piezas «históricas» (colorean cada nivel). Las últimas son superpuestas. */
+const RAW = {
+  ac:[[-124.4,42],[-111,42],[-111,36.5],[-114.6,35],[-114.7,32.7],[-117.1,32.5],[-118.5,34],[-120.5,34.5],[-121.9,36.6],[-122.5,37.7],[-123,38.5],[-124.4,40.4]],
+  nm:[[-111,42],[-106,42],[-106,37],[-103,37],[-103,36.5],[-103,32],[-106.6,32],[-106.5,31.78],[-108.2,31.78],[-108.2,31.33],[-111.07,31.33],[-114.81,32.49],[-114.7,32.7],[-114.6,35],[-111,36.5]],
+  tx:[[-106.5,31.78],[-106.6,32],[-103,32],[-103,36.5],[-100,36.5],[-100,34.6],[-97,33.8],[-94.04,33.55],[-94.04,31],[-93.85,29.7],[-95,29.2],[-96.5,28.3],[-97.4,27.85],[-97.15,25.95],[-98.2,26.1],[-99.5,27.5],[-100.5,28.7],[-101,29.4],[-102.5,29.8],[-103.2,29],[-104.5,29.6],[-105,30.7]],
+  coa:[[-103.2,29],[-102.5,29.8],[-101,29.4],[-100.5,28.7],[-100.4,27.5],[-100.2,26],[-101,25],[-102.8,25.3],[-103.4,26],[-103.3,27.5]],
+  baja:[[-117.1,32.5],[-114.7,32.7],[-114.8,31.8],[-114.5,30.9],[-113.6,29.5],[-112.9,28.6],[-112.2,27.4],[-111.2,26],[-110.3,24.2],[-109.5,23.2],[-110,22.9],[-111.2,24],[-112.1,25],[-113.2,26.6],[-114.7,27.8],[-114.1,28.5],[-115.2,29.8],[-116.1,30.9],[-116.9,32]],
+  son:[[-114.81,32.49],[-111.07,31.33],[-109.05,31.33],[-109,30],[-108.7,28],[-108.4,26.8],[-107.1,25.2],[-106.2,23.5],[-105.5,22.6],[-106.4,23.2],[-107.5,24.4],[-108.4,25.5],[-109.4,26.7],[-111,27.9],[-112.2,28.9],[-112.9,30.2],[-113.6,31.3],[-114.8,31.9]],
+  chi:[[-109.05,31.33],[-108.2,31.33],[-108.2,31.78],[-106.5,31.78],[-105,30.7],[-104.5,29.6],[-103.2,29],[-103.3,27.5],[-103.4,26],[-104.2,24.2],[-104.6,23.2],[-105.5,22.6],[-106.2,23.5],[-107.1,25.2],[-108.4,26.8],[-108.7,28],[-109,30]],
+  noe:[[-100.5,28.7],[-99.5,27.5],[-98.2,26.1],[-97.15,25.95],[-97.2,24.5],[-97.7,22.8],[-97.8,22.3],[-98.4,22.3],[-99.3,22.9],[-99.5,23.8],[-100.3,24.4],[-101,25],[-100.2,26],[-100.4,27.5]],
+  occ:[[-104.2,24.2],[-103.4,26],[-102.8,25.3],[-101,25],[-100.3,24.4],[-99.5,23.8],[-99.3,22.9],[-98.4,22.3],[-98.8,21.4],[-99.3,20.5],[-99.9,20],[-100.1,19.3],[-100.2,18.5],[-101.2,18.3],[-102.2,17.95],[-103,18.4],[-104.3,19.05],[-105.2,20.5],[-105.5,21.5],[-105.5,22.6],[-104.6,23.2]],
+  cen:[[-97.8,22.3],[-98.4,22.3],[-98.8,21.4],[-99.3,20.5],[-99.9,20],[-100.1,19.3],[-100.2,18.5],[-99.4,18.5],[-98.7,18.1],[-98.3,17.5],[-97.5,18],[-96.6,18.2],[-96.2,17.7],[-95.3,17.2],[-94.1,17.3],[-94.1,18.2],[-94.8,18.2],[-95.5,18.7],[-95.9,18.9],[-96.1,19.2],[-96.4,19.8],[-97,20.6],[-97.4,21.2],[-97.75,22]],
+  gro:[[-102.2,17.95],[-101.2,18.3],[-100.2,18.5],[-99.4,18.5],[-98.7,18.1],[-98.3,17.5],[-98.6,16.4],[-99.9,16.85],[-101,17.25]],
+  oax:[[-98.3,17.5],[-97.5,18],[-96.6,18.2],[-96.2,17.7],[-95.3,17.2],[-94.1,17.3],[-94,16.1],[-95.2,16.2],[-97.1,15.9],[-98.6,16.4]],
+  tab:[[-94.1,18.2],[-93.4,18.4],[-92.6,18.6],[-91.5,18.55],[-91,17.82],[-92,17.4],[-93,17.5],[-94.1,17.3]],
+  chp:[[-94.1,17.3],[-93,17.5],[-92,17.4],[-91,17.82],[-90.99,16.9],[-91.7,16.1],[-92.2,15.2],[-92.2,14.55],[-93,15.2],[-93.9,16],[-94,16.1]],
+  yuc:[[-91.5,18.55],[-91,17.82],[-89.15,17.82],[-88.3,18.5],[-87.8,18.45],[-87.4,19.4],[-87.4,20.2],[-86.8,21],[-87,21.55],[-88,21.5],[-89.6,21.35],[-90.3,21],[-90.5,20],[-90.7,19.3]],
+  gt:[[-91,17.82],[-89.15,17.82],[-89.15,15.9],[-88.9,15.9],[-88.2,15.7],[-87.5,15.85],[-86,15.95],[-86,13.1],[-87.7,13.1],[-89.5,13.5],[-91,13.9],[-92.2,14.55],[-92.2,15.2],[-91.7,16.1],[-90.99,16.9]],
+  bel:[[-89.15,17.82],[-88.3,18.5],[-87.85,18.2],[-88.1,17.2],[-88.4,16.3],[-88.9,15.9],[-89.15,15.9]],
+  camp:[[-91.5,18.55],[-91,17.82],[-89.15,17.82],[-89.15,19],[-89.8,19.9],[-90.4,20.85],[-90.5,20],[-90.7,19.3]],
+  hid:[[-99,21.35],[-98.4,21],[-98.2,20.5],[-97.9,20.2],[-98.4,19.6],[-98.9,19.6],[-99.4,19.9],[-99.5,20.6]],
+  mor:[[-99.5,19.15],[-98.7,19.1],[-98.65,18.5],[-99.2,18.35],[-99.5,18.6]],
+  nue:[[-97.15,25.95],[-98.2,26.1],[-99.5,27.5],[-100.5,28.7],[-100.2,29.8],[-99.1,28.5],[-98.2,28],[-97.4,27.85]],
+  soc:[[-92.2,14.55],[-93,15.2],[-92.7,15.65],[-92.2,15.2]],
+  mes:[[-106.5,31.78],[-106.9,32.37],[-108.2,32.37],[-108.2,33.3],[-111,33],[-114.7,32.75],[-114.81,32.49],[-111.07,31.33],[-108.2,31.33],[-108.2,31.78]]
+};
+const OV_IDS = ["camp","hid","mor","nue","soc","mes"];
+const ZONE_IDS = ["soc","nue","mes"];                 // zonas históricas clicables por encima de los estados
+const CLICK_MACRO = ["ac","nm","tx","gt","bel","soc","nue","mes"]; // piezas históricas que sí se tocan
+const OV = new Set(OV_IDS);
+const BG_LAND = [[-111,42],[-85,42],[-85,29.7],[-86.5,30.4],[-88.4,30.3],[-89.4,29],[-91,29.3],[-93.85,29.7],[-94.04,33.55],[-103,37],[-106,37],[-106,42]].map(proj).join(" ");
+
+/* Los 32 estados modernos (capa de bordes finos y clic) */
+const RAWS = {
+  bc:[[-117.1,32.5],[-114.7,32.7],[-114.8,31.8],[-114.5,30.9],[-113.6,29.5],[-112.9,28.6],[-112.55,28],[-114.53,28],[-114.1,28.5],[-115.2,29.8],[-116.1,30.9],[-116.9,32]],
+  bcs:[[-114.53,28],[-112.55,28],[-112.2,27.4],[-111.2,26],[-110.3,24.2],[-109.5,23.2],[-110,22.9],[-111.2,24],[-112.1,25],[-113.2,26.6],[-114.7,27.8]],
+  son:[[-114.81,32.49],[-111.07,31.33],[-109.05,31.33],[-109,30],[-108.7,28],[-108.4,26.8],[-109.07,26.3],[-109.4,26.7],[-111,27.9],[-112.2,28.9],[-112.9,30.2],[-113.6,31.3],[-114.8,31.9]],
+  sin:[[-108.4,26.8],[-107.75,26],[-107.1,25.2],[-106.2,23.5],[-105.5,22.6],[-106.4,23.2],[-107.5,24.4],[-108.4,25.5],[-109.07,26.3]],
+  chih:[[-109.05,31.33],[-108.2,31.33],[-108.2,31.78],[-106.5,31.78],[-105,30.7],[-104.5,29.6],[-103.2,29],[-103.3,27.5],[-103.4,26],[-107.75,26],[-108.4,26.8],[-108.7,28],[-109,30]],
+  dgo:[[-103.4,26],[-107.75,26],[-107.1,25.2],[-106.2,23.5],[-105.5,22.6],[-104.6,23.2],[-104.2,24.2]],
+  coa:[[-103.2,29],[-102.5,29.8],[-101,29.4],[-100.5,28.7],[-100.4,27.5],[-100.2,26],[-101,25],[-102.8,25.3],[-103.4,26],[-103.3,27.5]],
+  nl:[[-100.5,28.7],[-99.5,27.5],[-99.1,27.07],[-99.2,25.7],[-99.5,23.8],[-100.3,24.4],[-101,25],[-100.2,26],[-100.4,27.5]],
+  tam:[[-99.1,27.07],[-98.2,26.1],[-97.15,25.95],[-97.2,24.5],[-97.7,22.8],[-97.8,22.3],[-98.4,22.3],[-99.3,22.9],[-99.5,23.8],[-99.2,25.7]],
+  zac:[[-104.2,24.2],[-103.4,26],[-102.8,25.3],[-101,25],[-101.2,24],[-101.9,22.8],[-101,21.9],[-101.6,21.5],[-102,21],[-102.8,21],[-103.5,21.7],[-104.1,22.5],[-104.6,23.2]],
+  slp:[[-101,25],[-100.3,24.4],[-99.5,23.8],[-99.3,22.9],[-98.4,22.3],[-98.8,21.4],[-99.2,21.3],[-99.5,21.2],[-100.4,21.5],[-101,21.9],[-101.9,22.8],[-101.2,24]],
+  nay:[[-104.6,23.2],[-104.1,22.5],[-103.5,21.7],[-104.4,21.2],[-105.2,20.5],[-105.5,21.5],[-105.5,22.6]],
+  jal:[[-103.5,21.7],[-102.8,21],[-102,21],[-102.1,20.4],[-102.9,19.9],[-103.6,19.2],[-103.5,18.65],[-104.3,19.05],[-105.2,20.5],[-104.4,21.2]],
+  gto:[[-100.4,21.5],[-101,21.9],[-101.6,21.5],[-102,21],[-102.1,20.4],[-101.6,19.9],[-100.9,19.9],[-100.5,20.2],[-100.6,20.8]],
+  qro:[[-99.5,21.2],[-99.2,21.3],[-98.8,21.4],[-99.3,20.5],[-99.9,20],[-100.5,20.2],[-100.6,20.8],[-100.4,21.5]],
+  mich:[[-102.1,20.4],[-101.6,19.9],[-100.9,19.9],[-100.5,20.2],[-99.9,20],[-100.1,19.3],[-100.2,18.5],[-101.2,18.3],[-102.2,17.95],[-103,18.4],[-103.5,18.65],[-103.6,19.2],[-102.9,19.9]],
+  mex:[[-98.8,21.4],[-98.4,21],[-98.2,20.5],[-97.9,20.2],[-98.4,19.6],[-98.7,19.1],[-98.65,18.5],[-98.7,18.1],[-99.4,18.5],[-100.2,18.5],[-100.1,19.3],[-99.9,20],[-99.3,20.5]],
+  pue:[[-97.9,20.2],[-97.6,19.9],[-97.4,19.4],[-97.2,18.9],[-96.9,18.5],[-96.6,18.2],[-97.5,18],[-98.3,17.5],[-98.7,18.1],[-98.65,18.5],[-98.7,19.1],[-98.4,19.6]],
+  ver:[[-97.8,22.3],[-98.4,22.3],[-98.8,21.4],[-98.4,21],[-98.2,20.5],[-97.9,20.2],[-97.6,19.9],[-97.4,19.4],[-97.2,18.9],[-96.9,18.5],[-96.6,18.2],[-96.2,17.7],[-95.3,17.2],[-94.1,17.3],[-94.1,18.2],[-94.8,18.2],[-95.5,18.7],[-95.9,18.9],[-96.1,19.2],[-96.4,19.8],[-97,20.6],[-97.4,21.2],[-97.75,22]],
+  gro:[[-102.2,17.95],[-101.2,18.3],[-100.2,18.5],[-99.4,18.5],[-98.7,18.1],[-98.3,17.5],[-98.6,16.4],[-99.9,16.85],[-101,17.25]],
+  oax:[[-98.3,17.5],[-97.5,18],[-96.6,18.2],[-96.2,17.7],[-95.3,17.2],[-94.1,17.3],[-94,16.1],[-95.2,16.2],[-97.1,15.9],[-98.6,16.4]],
+  tab:[[-94.1,18.2],[-93.4,18.4],[-92.6,18.6],[-91.5,18.55],[-91,17.82],[-92,17.4],[-93,17.5],[-94.1,17.3]],
+  chp:[[-94.1,17.3],[-93,17.5],[-92,17.4],[-91,17.82],[-90.99,16.9],[-91.7,16.1],[-92.2,15.2],[-92.2,14.55],[-93,15.2],[-93.9,16],[-94,16.1]],
+  camp:[[-91.5,18.55],[-91,17.82],[-89.15,17.82],[-89.15,19],[-89.8,19.9],[-90.4,20.85],[-90.5,20],[-90.7,19.3]],
+  yuc:[[-89.15,19],[-88.4,20.2],[-88,21],[-87,21.55],[-88,21.5],[-89.6,21.35],[-90.3,21],[-90.4,20.85],[-89.8,19.9]],
+  qroo:[[-89.15,17.82],[-88.3,18.5],[-87.8,18.45],[-87.4,19.4],[-87.4,20.2],[-86.8,21],[-87,21.55],[-88,21],[-88.4,20.2],[-89.15,19]],
+  // pequeños, superpuestos a otro estado
+  ags:[[-102.7,22.45],[-102,22.3],[-101.85,21.8],[-102.1,21.65],[-102.7,21.8]],
+  col:[[-104.3,19.05],[-104,19.4],[-103.6,19.2],[-103.5,18.65]],
+  cdmx:[[-99.35,19.55],[-99,19.6],[-98.95,19.15],[-99.25,19.05],[-99.35,19.2]],
+  tlax:[[-98.3,19.65],[-97.7,19.7],[-97.6,19.4],[-97.9,19.15],[-98.3,19.2]],
+  mor:[[-99.5,19.15],[-98.7,19.1],[-98.65,18.5],[-99.2,18.35],[-99.5,18.6]],
+  hid:[[-99,21.35],[-98.4,21],[-98.2,20.5],[-97.9,20.2],[-98.4,19.6],[-98.9,19.6],[-99.4,19.9],[-99.5,20.6]]
+};
+
+/* Nombres de las piezas históricas */
+const NAMES = {ac:"Alta California",nm:"Nuevo México",tx:"Texas",gt:"Centroamérica (Guatemala)",
+  bel:"Honduras Británica (hoy Belice)",soc:"Soconusco",nue:"Franja del Nueces",mes:"La Mesilla"};
+
+const STX = {mx:"Territorio mexicano",sur:"Anexada a México (antes Capitanía de Guatemala)",mxnew:"Pieza nueva o reordenada",
+  glitch:"Fusión o experimento interno",lost:"Territorio cedido a EE. UU.",usa:"Territorio de EE. UU.",
+  tex:"República de Texas (México no la reconoce)",dispute:"Zona en disputa",other:"Otro país o territorio ajeno",merged:"Territorio mexicano"};
+const STCLS = {mx:"yes",sur:"yes",mxnew:"no",glitch:"no",lost:"lost",usa:"usa",tex:"usa",dispute:"no",other:"usa",merged:"yes"};
+const LEG = {mx:"México",sur:"Anexada a México",mxnew:"Pieza nueva",glitch:"Fusión interna",lost:"Territorio cedido",
+  usa:"EE. UU.",tex:"República de Texas",dispute:"En disputa",other:"Otro país"};
+
+/* Textos de las piezas históricas clicables */
+const ZT = {
+  ac:"Provincia lejana y poco poblada del norte de la Nueva España. Pasó a EE. UU. por el Tratado de Guadalupe-Hidalgo (1848). Curiosamente, el oro se descubrió en California pocos días antes de la firma del tratado.",
+  nm:"Antigua provincia con capital en Santa Fe. EE. UU. la ocupó en 1846 y México la cedió en 1848. Su frontera sur se ajustó otra vez en 1853 con La Mesilla.",
+  tx:"Colonizada con familias angloamericanas desde los años 1820, se rebeló en 1836 y fue anexada a EE. UU. en 1845; México nunca reconoció esa independencia. La disputa por su límite sur (Nueces o Bravo) detonó la guerra de 1846.",
+  gt:"Las Provincias Unidas del Centro de América se separaron de México en 1823–1824, tras la caída del Imperio. Las fronteras del sur se cerraron por tratado hasta 1882 (Guatemala) y 1893 (Belice).",
+  bel:"Colonia británica en la costa caribeña. El Tratado Mariscal-Spencer (1893) fijó su frontera con México.",
+  soc:"Región cacaotera de la costa de Chiapas. Quedó en disputa con Guatemala desde 1824; México la incorporó definitivamente en 1842 y el Tratado Mariscal-Herrera (1882) cerró el pleito.",
+  nue:"Franja entre los ríos Nueces y Bravo. México reclamaba el Nueces como frontera de Texas; EE. UU., el Bravo. La disputa fue el pretexto de la guerra de 1846.",
+  mes:"Franja de casi 77 mil km² vendida a EE. UU. en 1853 por 10 millones de dólares, para una ruta de ferrocarril al Pacífico. Fue el último ajuste de la frontera norte actual."
+};
+
+/* Hitos para decir si cada estado ya existía en cada nivel */
+const DEF_MS = [[1824,"Estado de la federación"]];
+const DEF_BF = "Provincia de la Nueva España (aún no es estado)";
+const ST = {
+  bc:{n:"Baja California",ms:[[1824,"Territorio federal de Baja California (con BCS)"]],
+    t:"En el siglo XIX la península era un solo territorio federal. EE. UU. pidió incluirla en la negociación de 1848, pero el Tratado de Guadalupe-Hidalgo la dejó en México."},
+  bcs:{n:"Baja California Sur",ms:[[1824,"Territorio federal de Baja California (con BC)"]],
+    t:"Durante la invasión estadounidense hubo combates y ocupaciones en La Paz, San José del Cabo y Mulegé (1847–1848). Al final, el tratado dejó la península en México."},
+  son:{n:"Sonora",ms:[[1824,"Parte del Estado de Occidente (con Sinaloa)"],[1831,"Estado propio"]],
+    t:"Su frontera norte cambió dos veces: en 1848, con la pérdida de Alta California y Nuevo México, y en 1853, con La Mesilla. Fue zona de ataques apaches y de intentos filibusteros en los años 1850."},
+  sin:{n:"Sinaloa",ms:[[1824,"Parte del Estado de Occidente (con Sonora)"],[1831,"Estado propio"]],
+    t:"Compartió con Sonora el Estado de Occidente (1824–1830). Quedó lejos de la frontera, pero Mazatlán fue ocupado por fuerzas de EE. UU. a finales de 1847."},
+  chih:{n:"Chihuahua",
+    t:"Tras 1848 pasó a tener frontera directa con EE. UU. La Mesilla (1853) se vendió junto a su antiguo límite. En Ciudad Juárez–El Paso nace el conflicto de El Chamizal, por el cambio de curso del río Bravo, que seguirá abierto hasta 1963."},
+  dgo:{n:"Durango",
+    t:"Formaba con Chihuahua la antigua Nueva Vizcaya. No perdió territorio, pero compartió la lejanía y las incursiones indígenas del norte: un Estado débil tenía que defender regiones inmensas y poco pobladas."},
+  coa:{n:"Coahuila",ms:[[1824,"Estado «Coahuila y Tejas»"],[1836,"Estado de Coahuila (Texas se separó)"],[1856,"Unido temporalmente a Nuevo León"],[1864,"Estado de Coahuila"]],
+    t:"En 1824 se fusionó con Texas en «Coahuila y Tejas». Tras la rebelión texana (1836) quedó como frontera norte. Entre 1856 y 1864 se unió a Nuevo León bajo un solo gobierno, un experimento administrativo que se deshizo."},
+  nl:{n:"Nuevo León",ms:[[1824,"Estado de la federación"],[1856,"Unido temporalmente a Coahuila"],[1864,"Estado de la federación"]],
+    t:"Su capital, Monterrey, fue tomada por el ejército de Zachary Taylor en septiembre de 1846. Entre 1856 y 1864, bajo el gobernador Santiago Vidaurri, estuvo unido a Coahuila."},
+  tam:{n:"Tamaulipas",
+    t:"Es el estado en el centro de la disputa Nueces–Bravo: México reclamaba el Nueces; EE. UU., el río Bravo. El avance de Taylor a la franja y el Incidente de Thornton (1846) detonaron la guerra, y Matamoros fue ocupada."},
+  zac:{n:"Zacatecas",
+    t:"Estado minero y de milicias federalistas. En 1835 Santa Anna derrotó a su milicia al centralizar el poder, antes de la crisis de Texas; como castigo político se le quitó Aguascalientes."},
+  ags:{n:"Aguascalientes",ms:[[1835,"Territorio (separado de Zacatecas)"],[1857,"Estado de la federación"]],bf:"Parte de Zacatecas",
+    t:"Se separó de Zacatecas en 1835 y fue reconocido formalmente como estado propio en la Constitución de 1857 (Artículo 43), la «foto» definitiva del mapa federal."},
+  slp:{n:"San Luis Potosí",
+    t:"Ciudad de paso hacia el norte y centro de recursos para la guerra: aquí se reunió y organizó el ejército de Santa Anna antes de la batalla de La Angostura (Buenavista), en febrero de 1847."},
+  nay:{n:"Nayarit",ms:[[1884,"Territorio de Tepic (federal)"],[1917,"Estado de la federación"]],bf:"Parte de Jalisco",
+    t:"En este periodo todavía formaba parte de Jalisco. En 1884 se creó el Territorio de Tepic, y su existencia como estado llegó hasta 1917, fuera del periodo del atlas."},
+  jal:{n:"Jalisco",
+    t:"Fue de los primeros estados que exigieron el federalismo (1823). Su gran extensión incluía Tepic y la costa del Pacífico; ese tamaño explica reacomodos posteriores, como la creación del Territorio de Tepic en 1884."},
+  gto:{n:"Guanajuato",
+    t:"Cuna de la guerra de Independencia (Alhóndiga de Granaditas, 1810) y estado minero del Bajío. Con Querétaro y Michoacán concentraba la riqueza agrícola y minera que sostenía al país."},
+  qro:{n:"Querétaro",
+    t:"En 1848, con la capital ocupada por EE. UU., el gobierno se instaló aquí y el Congreso ratificó el Tratado de Guadalupe-Hidalgo. En 1867 fue escenario del fin del Segundo Imperio."},
+  mich:{n:"Michoacán",
+    t:"En 1849 cedió parte de su territorio (Tierra Caliente) para crear Guerrero: un reacomodo interno para gobernar mejor una región lejana de su capital."},
+  col:{n:"Colima",ms:[[1823,"Territorio federal"],[1857,"Estado de la federación"]],bf:"Aún no existe como entidad separada",
+    t:"Territorio federal desde 1823. La Constitución de 1857 (Artículo 43) lo reconoció como estado de la federación."},
+  mex:{n:"Estado de México",
+    t:"Fue el estado más grande del centro: de él salieron territorios para el Distrito Federal (1824), Guerrero (1849), Hidalgo y Morelos (1869). Cada recorte buscó acercar el gobierno a la gente."},
+  cdmx:{n:"Distrito Federal (hoy CDMX)",ms:[[1824,"Distrito Federal, sede de los poderes"]],bf:"Ciudad de México, capital de la Nueva España",
+    t:"Se creó en 1824 como sede de los poderes federales. El 14 de septiembre de 1847 fue ocupado por el ejército de EE. UU., y el gobierno se trasladó a Querétaro."},
+  mor:{n:"Morelos",ms:[[1869,"Estado de la federación"]],bf:"Parte del Estado de México",
+    t:"Nace en 1869, bajo la República Restaurada, separado del Estado de México. Región de haciendas azucareras: un estado más pequeño acercó el gobierno a los problemas locales."},
+  hid:{n:"Hidalgo",ms:[[1869,"Estado de la federación"]],bf:"Parte del Estado de México",
+    t:"Nace en 1869 por decreto del presidente Benito Juárez, separado del Estado de México. Reunió zonas mineras como Real del Monte y Pachuca bajo un gobierno propio."},
+  tlax:{n:"Tlaxcala",ms:[[1824,"Territorio federal"],[1857,"Estado de la federación"]],
+    t:"Territorio federal desde 1824; la Constitución de 1857 lo reconoció como estado. Es una de las piezas pequeñas del tablero federal."},
+  pue:{n:"Puebla",
+    t:"En 1849 cedió parte de su territorio para formar Guerrero. En 1862–1863 fue escenario de la batalla del 5 de mayo y del sitio de Puebla durante la Intervención francesa."},
+  ver:{n:"Veracruz",
+    t:"Puerta de entrada de las invasiones: Guerra de los Pasteles (1838), ocupación de Veracruz por EE. UU. en marzo de 1847 y desembarco tripartito en 1861. Su puerto era la gran llave del país."},
+  gro:{n:"Guerrero",ms:[[1849,"Estado de la federación"]],bf:"Aún no existe: territorios de México, Puebla y Michoacán",
+    t:"Nace en 1849 segregando partes del Estado de México, Puebla y Michoacán. No es una pérdida: es un reacomodo interno para gobernar mejor una región difícil."},
+  oax:{n:"Oaxaca",
+    t:"Cuna de Benito Juárez y de Ignacio Mariscal. En su Istmo de Tehuantepec había interés extranjero por una ruta interoceánica, un tema presente en la negociación del Tratado de La Mesilla."},
+  tab:{n:"Tabasco",
+    t:"Estado costero del sureste. Fuerzas navales de EE. UU. ocuparon brevemente Frontera y San Juan Bautista (hoy Villahermosa) durante la guerra de 1846–1848."},
+  chp:{n:"Chiapas",
+    t:"En 1824 votó por plebiscito unirse a México (antes dependía de la Capitanía General de Guatemala). El Soconusco, en su costa, siguió en disputa hasta 1842 y hasta el tratado de 1882 con Guatemala."},
+  camp:{n:"Campeche",ms:[[1858,"Separado de hecho de Yucatán"],[1863,"Estado de la federación"]],bf:"Parte de Yucatán",
+    t:"Se separó de hecho de Yucatán en 1858 y fue reconocido como estado en 1863. Es el ejemplo de una «pérdida» interna: Yucatán perdió una pieza, pero México no perdió territorio."},
+  yuc:{n:"Yucatán",
+    t:"Vive dos independencias de facto, ofrece anexarse a potencias extranjeras (1847–1848), sufre la Guerra de Castas (desde 1847) y pierde Campeche (1858–1863). Un estado que casi se desprendió del país."},
+  qroo:{n:"Quintana Roo",ms:[[1902,"Territorio federal"]],bf:"Parte de Yucatán",
+    t:"Su territorio oriental fue refugio de los mayas rebeldes de la Guerra de Castas (Chan Santa Cruz), que mantuvieron autonomía de hecho. En 1893 el Tratado Mariscal-Spencer fijó su frontera sur con Honduras Británica; el territorio federal se creó en 1902."}
+};
+const STATE_ORDER = ["bc","bcs","son","sin","chih","dgo","coa","nl","tam","zac","slp","nay","jal","gto","qro","mich","mex","pue","ver","gro","oax","tab","chp","camp","yuc","qroo","ags","col","cdmx","tlax","mor","hid"];
+
+/* Etiquetas de estados [lon, lat, texto, tamaño] */
+const STL = {
+  bc:[-114.6,30.2,"BC",10], bcs:[-111.6,25.6,"BCS",10], son:[-110.6,29.6,"Sonora",11], sin:[-107.5,25.2,"Sinaloa",10],
+  chih:[-106.2,28.8,"Chihuahua",11], dgo:[-105.2,24.9,"Durango",10], coa:[-102,28.2,"Coahuila",10], nl:[-99.9,26.1,"NL",10],
+  tam:[-98.4,24.4,"Tamps.",9], zac:[-102.7,24,"Zacatecas",10], slp:[-100.3,22.9,"SLP",10], nay:[-104.9,22.1,"Nay.",9],
+  jal:[-103.6,20.4,"Jalisco",10], ags:[-102.3,22.0,"Ags",8], gto:[-101.2,20.8,"Gto.",9], qro:[-99.9,20.8,"Qro.",8],
+  mich:[-101.9,19.2,"Michoacán",9], col:[-103.9,19.1,"Col.",8], mex:[-99.85,19.0,"Méx.",8], cdmx:[-99.15,19.35,"CDMX",7],
+  mor:[-99.05,18.8,"Mor.",8], hid:[-98.8,20.5,"Hgo.",9], tlax:[-98.0,19.45,"Tlax.",8], pue:[-97.6,18.7,"Puebla",9],
+  ver:[-96.7,20.0,"Ver.",9], gro:[-100.6,17.5,"Guerrero",10], oax:[-96.6,17.1,"Oaxaca",10], tab:[-92.8,17.9,"Tab.",9],
+  chp:[-92.4,16.5,"Chiapas",10], camp:[-90.4,18.9,"Camp.",9], yuc:[-89.0,20.8,"Yucatán",10], qroo:[-88.2,19.3,"Q. Roo",8]
+};
+const LABELS = {ac:[-118,39,"California",20], nm:[-108.5,34.2,"N. México",18], tx:[-99.5,32.5,"Texas",22], gt:[-89,14.6,"Centroamérica",15]};
+
+/* =====================================================
+   NIVELES
+   ===================================================== */
+const B = {ac:"mx",nm:"mx",tx:"mx",coa:"mx",baja:"mx",son:"mx",chi:"mx",noe:"mx",occ:"mx",cen:"mx",gro:"merged",oax:"mx",tab:"mx",
+  chp:"mx",yuc:"mx",gt:"other",bel:"other",camp:"hidden",hid:"hidden",mor:"hidden",soc:"hidden",nue:"hidden",mes:"hidden"};
+const NUSA = {ac:"usa",nm:"usa",tx:"usa"};
+const TIPOS = {est:"Punto de partida",ext:"Pérdida externa",int:"Reacomodo interno",pac:"Frontera pactada"};
+const SC = [
+ { k:"1821", yr:1821, tipo:"est", game:"NIVEL 1 · inicio del juego", title:"El mapa heredado",
+   st:{chp:"sur",gt:"sur"},
+   text:"Al independizarse, México no hereda un Estado nacional delimitado, sino el trazo administrativo de la Nueva España: casi el doble del tamaño actual. Al norte, las Provincias Internas (de Alta California a Texas); al sur, la Capitanía General de Guatemala, anexada voluntariamente.",
+   dec:"Aceptar un mapa enorme antes de tener un Estado capaz de gobernarlo.",
+   stk:[{x:95,y:260,t:"inicio",c:"ok",r:-3}],
+   pins:[{c:"iturbide",ll:[-99.13,19.43]},{c:"odonoju",ll:[-96.93,18.89]}] },
+ { k:"1823–24", yr:1823, tipo:"ext", game:"NIVEL 2 · PRIMER GOLPE", title:"Adiós, Centroamérica",
+   st:{soc:"dispute"},
+   text:"Apenas cae el Imperio de Iturbide, las Provincias Unidas del Centro de América deciden separarse. Es la primera y mayor pérdida territorial, ocurrida antes de que el país cumpla tres años. Chiapas vota en plebiscito quedarse en México (1824); el Soconusco queda en el limbo diplomático, «en disputa».",
+   dec:"Aceptar la separación centroamericana y el plebiscito de Chiapas, dejando el Soconusco sin resolver hasta su incorporación definitiva en 1842.",
+   stk:[{x:700,y:330,t:"¡SEPARACIÓN!",c:"warn",r:4}],
+   pins:[{c:"filisola",ll:[-90.5,14.63]},{c:"diputado",ll:[-92.64,16.74]},{c:"tomasa",ll:[-92.26,14.9]}] },
+ { k:"1824", yr:1824, tipo:"int", game:"NIVEL 3 · ERROR DEL SISTEMA", title:"Reglas del juego: la Constitución de 1824",
+   st:{tx:"glitch",coa:"glitch"},
+   text:"Se fija la matriz territorial interior: 19 estados, 4 territorios y 1 Distrito Federal. Todos los cambios futuros partirán de este tablero base. Pero hay un bug: Coahuila y Texas se fusionan en un solo estado («Coahuila y Tejas») por falta de población texana.",
+   dec:"Unir Coahuila y Texas para poblar y gobernar una frontera norte casi vacía.",
+   crit:"Texas no se separará de «México» en abstracto, sino de este estado específico, creado apenas en 1824.",
+   stk:[{x:700,y:330,t:"ERROR DEL SISTEMA",c:"warn",r:-4}],
+   pins:[{c:"ramos",ll:[-101.0,25.42]},{c:"victoria",ll:[-99.13,19.43]}] },
+ { k:"1836–45", yr:1836, tipo:"ext", game:"NIVEL 4 · EFECTO DOMINÓ", title:"El efecto dominó de Texas (1821–1845)",
+   text:"Colonización, rebelión, anexión. El gobierno mexicano invita a familias angloamericanas a poblar una frontera vulnerable; hacia 1835 los estadounidenses superan ampliamente a los mexicanos. Las tensiones con el centralismo de Santa Anna detonan la guerra (1836). Tras San Jacinto, Texas es independiente de facto durante 9 años, hasta que EE. UU. la anexa en 1845.",
+   dec:"Poblar con colonos extranjeros para asegurar la frontera: una decisión que resolvió un problema demográfico y creó uno político.",
+   crit:"Entre las tensiones estaba también la esclavitud: México la había abolido (1829) y muchos colonos dependían de ella. Una causa no excluye a las otras.",
+   subs:[
+     {k:"1836 · República de Texas", yr:1836, st:{tx:"tex"}, stk:[{x:700,y:335,t:"SAN JACINTO 1836",c:"info",r:3}]},
+     {k:"1845 · Anexión", yr:1845, st:{tx:"usa"}, stk:[{x:700,y:335,t:"¡CASUS BELLI!",c:"warn",r:-4}]}
+   ],
+   pins:[{c:"austin",ll:[-96.4,29.9]},{c:"santaanna36",ll:[-94.9,29.75]},{c:"navarro",ll:[-98.5,29.42]}] },
+ { k:"1846–48", yr:1848, tipo:"ext", game:"NIVEL 5 · EL DESPOJO", title:"El despojo histórico (1846–1848)",
+   st:{ac:"lost",nm:"lost",tx:"usa",nue:"dispute",mes:"mx"},
+   text:"Reclamo mexicano: la frontera en el río Nueces. Reclamo de EE. UU.: el río Bravo. El avance de Zachary Taylor a la franja disputada (Incidente de Thornton) sirvió de pretexto para la guerra formal. Con el Tratado de Guadalupe-Hidalgo (1848), México cede Alta California y Nuevo México y pierde más de la mitad (cerca del 55%) de su territorio.",
+   dec:"Firmar el tratado para terminar la guerra, a cambio de 15 millones de dólares y garantías para quienes quedaron al otro lado.",
+   stk:[{x:245,y:120,t:"perdido",c:"danger",r:-12},{x:700,y:330,t:"TRATADO 1848",c:"info",r:3}],
+   pins:[{c:"taylor",ll:[-97.5,25.87]},{c:"remigio",ll:[-98.5,27.2]},{c:"trist",ll:[-99.12,19.48]},{c:"penaypena",ll:[-100.39,20.59]},{c:"ramon",ll:[-120.0,36.3]}] },
+ { k:"1849", yr:1849, tipo:"int", game:"NIVEL 6 · NUEVA PIEZA", title:"Nace Guerrero",
+   st:{...NUSA,gro:"mxnew",mes:"mx"},
+   text:"No todo cambio del mapa es una pérdida. Guerrero nace segregando pedazos del Estado de México, Puebla y Michoacán: una pieza nueva dibujada por el propio gobierno para acercar la autoridad a una región difícil de gobernar.",
+   dec:"Crear un estado nuevo para mejorar la gobernabilidad local.",
+   stk:[{x:140,y:470,t:"NUEVA PIEZA",c:"ok",r:-3}],
+   pins:[{c:"alvarez",ll:[-99.5,17.55]},{c:"pascual",ll:[-100.9,18.0]}] },
+ { k:"1853", yr:1853, tipo:"ext", game:"NIVEL 7 · DLC", title:"DLC: La Mesilla",
+   st:{...NUSA,gro:"mx",mes:"lost"},
+   text:"Último ajuste. Santa Anna vende una franja extra por urgencia fiscal (mexicana) y por el interés estadounidense en una ruta de ferrocarril al Pacífico: casi 77 mil km² por 10 millones de dólares. Fin de la frontera norte actual.",
+   dec:"Vender una franja adicional ante la urgencia fiscal, a cambio de dejar fija la frontera norte.",
+   crit:"Fue una negociación y no una invasión, pero ocurrió en un contexto de urgencia fiscal y con un poder muy desigual entre las partes.",
+   stk:[{x:140,y:470,t:"DLC · 1853",c:"info",r:-3}],
+   pins:[{c:"santaanna53",ll:[-99.13,19.43]},{c:"gadsden",ll:[-110.97,32.22]},{c:"dolores",ll:[-106.8,32.27]}] },
+ { k:"1857", yr:1857, tipo:"int", game:"NIVEL 8 · Punto Salvado", title:"Punto Salvado: la Constitución de 1857",
+   st:{...NUSA,gro:"mx",coa:"glitch",noe:"glitch"},
+   text:"Más allá de su contenido político, la Constitución de 1857 funciona como un punto de guardado cartográfico: su Artículo 43 fija la lista definitiva de estados de la federación. Aguascalientes es reconocido como estado propio; Baja California permanece como territorio federal; y Nuevo León y Coahuila se unen temporalmente (1856–1864) en un intento fallido por simplificar la administración.",
+   dec:"Congelar el mapa federal en una lista de estados: la foto de lo que habrá que defender.",
+   stk:[{x:140,y:470,t:"PUNTO SALVADO· ART. 43",c:"ok",r:-3},{x:700,y:330,t:"ERROR DE 1856–64",c:"warn",r:3}],
+   pins:[{c:"comonfort",ll:[-99.1,19.4]},{c:"arriaga",ll:[-100.98,22.15]},{c:"vidaurri",ll:[-100.3,25.67]}] },
+ { k:"1858–69", yr:1858, tipo:"int", game:"NIVEL 9 · PIEZAS FINALES", title:"Caos en Yucatán y las últimas piezas",
+   st:{...NUSA,gro:"mx"},
+   text:"Yucatán vive dos independencias de facto, ofrece anexarse a potencias extranjeras, sufre la Guerra de Castas y termina perdiendo Campeche (1858–1863). En 1869, bajo la República Restaurada, Hidalgo y Morelos nacen separados del Estado de México.",
+   dec:"Dividir estados grandes o inestables para volverlos gobernables.",
+   stk:[{x:700,y:330,t:"NUEVAS PIEZAS",c:"ok",r:-3}],
+   subs:[
+     {k:"1858–63 · Campeche", yr:1863, st:{camp:"mxnew"}, pins:[{c:"marta",ll:[-90.53,19.85]}]},
+     {k:"1869 · Hidalgo y Morelos", yr:1869, st:{camp:"mx",hid:"mxnew",mor:"mxnew"}, pins:[{c:"juarez",ll:[-99.13,19.43]},{c:"esteban",ll:[-98.67,20.14]}]}
+   ],
+   pins:[{c:"chi",ll:[-88.2,20.35]},{c:"pat",ll:[-88.5,19.6]}] },
+ { k:"1882–93", yr:1893, tipo:"pac", game:"NIVEL 10 · CIERRE DEL SUR", title:"Sellando las puertas del sur",
+   st:{...NUSA,gro:"mx",camp:"mx",hid:"mx",mor:"mx",soc:"mx"},
+   text:"El Tratado Mariscal-Herrera (1882) fija el límite definitivo con Guatemala: adiós al viejo pleito del Soconusco. El Tratado Mariscal-Spencer (1893) fija la frontera con Honduras Británica (la actual Belice). Pendiente: el conflicto de El Chamizal, en el norte (por el cambio de curso del río Bravo), queda sin resolver hasta 1963.",
+   dec:"Resolver por la vía diplomática lo que ya no se podía resolver por la fuerza.",
+   stk:[{x:643,y:650,t:"🔒 1882",c:"ok",r:-4},{x:770,y:400,t:"🔒 1893",c:"ok",r:4}],
+   pins:[{c:"mariscal",ll:[-99.13,19.43]},{c:"aurelio",ll:[-88.5,18.3]},{c:"cruz",ll:[-106.45,31.75]}] }
+];
+
+/* =====================================================
+   RETRATOS ILUSTRADOS (SVG): rostro representativo
+   ===================================================== */
+function face(l){
+  const sk=l.skin||"#e2b08c", hr=l.hair||"#2a1d16", cl=l.cloth||"#2b3a67", gold=l.trim||"#d4a72c";
+  const o=l.out||"suit", hs=(l.hs===undefined)?"short":l.hs, hat=l.hat||"";
+  let s='<circle cx="50" cy="50" r="49" fill="'+(l.bg||"#cfe0ea")+'"/><g clip-path="url(#cpCirc)">';
+  if(hs==="long") s+='<path d="M27 46 Q24 84 38 90 L62 90 Q76 84 73 46Z" fill="'+hr+'"/>';
+  // cuerpo y cuello
+  s+='<path d="M2 100 Q8 73 50 71 Q92 73 98 100Z" fill="'+cl+'"/>';
+  s+='<rect x="43" y="56" width="14" height="18" fill="'+sk+'"/><rect x="43" y="56" width="14" height="18" fill="rgba(0,0,0,.13)"/>';
+  if(o==="suit"||o==="uniform"||o==="cassock") s+='<path d="M41 71 L50 88 L59 71Z" fill="'+(o==="cassock"?cl:"#f3efe4")+'"/>';
+  if(o==="suit") s+='<path d="M47.5 76 L52.5 76 L54.5 85 L45.5 85Z" fill="'+(l.tie||"#9a2a2a")+'"/>';
+  if(o==="cassock") s+='<rect x="45.5" y="70" width="9" height="5" fill="#fff"/>';
+  if(o==="uniform"){
+    s+='<path d="M36 70 Q50 82 64 70 L64 77 Q50 89 36 77Z" fill="'+gold+'"/>';
+    s+='<ellipse cx="14" cy="84" rx="12" ry="5" fill="'+gold+'" transform="rotate(-22 14 84)"/><ellipse cx="86" cy="84" rx="12" ry="5" fill="'+gold+'" transform="rotate(22 86 84)"/>';
+    s+='<circle cx="50" cy="90" r="2" fill="'+gold+'"/><circle cx="50" cy="96" r="2" fill="'+gold+'"/>';
+    if(l.sash) s+='<path d="M22 78 L34 72 L82 100 L64 100Z" fill="'+l.sash+'"/>';
+    if(l.medal) s+='<circle cx="68" cy="88" r="3.5" fill="'+gold+'" stroke="#fff" stroke-width="1"/>';
+  }
+  if(o==="peasant") s+='<path d="M42 72 L50 83 L58 72Z" fill="rgba(0,0,0,.16)"/>';
+  // cabeza
+  s+='<ellipse cx="31.5" cy="47" rx="3.6" ry="5" fill="'+sk+'"/><ellipse cx="68.5" cy="47" rx="3.6" ry="5" fill="'+sk+'"/>';
+  s+='<ellipse cx="50" cy="45" rx="19" ry="24" fill="'+sk+'"/>';
+  // cabello
+  if(hs==="short"||hs==="long") s+='<path d="M31 45 Q29 21 50 20 Q71 21 69 45 Q68 32 50 31 Q32 32 31 45Z" fill="'+hr+'"/>';
+  if(hs==="side") s+='<path d="M31 45 Q28 20 50 19 Q72 20 69 45 Q68 33 54 30 Q40 30 36 36 Q32 38 31 45Z" fill="'+hr+'"/><path d="M31 45 L32 57 L35 57 L36 44Z M69 45 L68 57 L65 57 L64 44Z" fill="'+hr+'"/>';
+  if(hs==="bald") s+='<path d="M31 46 Q28 34 35 29 L37 44Z M69 46 Q72 34 65 29 L63 44Z" fill="'+hr+'"/>';
+  if(hs==="curly") s+='<g fill="'+hr+'"><circle cx="36" cy="29" r="7"/><circle cx="45" cy="23" r="7"/><circle cx="55" cy="23" r="7"/><circle cx="64" cy="29" r="7"/><circle cx="33" cy="39" r="6"/><circle cx="67" cy="39" r="6"/></g>';
+  // rasgos
+  s+='<ellipse cx="42.5" cy="45" rx="2.7" ry="1.9" fill="#fff"/><circle cx="42.5" cy="45" r="1.4" fill="#1b1410"/>';
+  s+='<ellipse cx="57.5" cy="45" rx="2.7" ry="1.9" fill="#fff"/><circle cx="57.5" cy="45" r="1.4" fill="#1b1410"/>';
+  s+='<path d="M38 40.5 L46.5 39.3 M53.5 39.3 L62 40.5" stroke="'+hr+'" stroke-width="2" stroke-linecap="round" fill="none"/>';
+  s+='<path d="M50 46 L48 54 Q50 56 52 54" stroke="rgba(0,0,0,.35)" fill="none" stroke-width="1.4" stroke-linecap="round"/>';
+  s+='<path d="M44.5 61 Q50 64 55.5 61" stroke="'+(l.female?"#a3433a":"#7a3b32")+'" stroke-width="1.9" fill="none" stroke-linecap="round"/>';
+  const fc=l.fhc||hr;
+  if(l.fh==="beard") s+='<path d="M31.5 50 Q33 75 50 77 Q67 75 68.5 50 Q66 64 50 66 Q34 64 31.5 50Z" fill="'+fc+'"/>';
+  if(l.fh==="must"||l.fh==="beard") s+='<path d="M39.5 57 Q45 53 50 56.5 Q55 53 60.5 57 Q55 60 50 58 Q45 60 39.5 57Z" fill="'+fc+'"/>';
+  if(l.glasses) s+='<g fill="none" stroke="#2b2118" stroke-width="1.3"><circle cx="42.5" cy="45" r="5.4"/><circle cx="57.5" cy="45" r="5.4"/><path d="M48 45 L52 45"/></g>';
+  // sombreros
+  if(hat==="bicorne"){
+    s+='<path d="M6 37 Q50 -4 94 37 Q50 22 6 37Z" fill="#171a26"/><path d="M6 37 Q50 22 94 37" stroke="'+gold+'" stroke-width="2.5" fill="none"/>';
+    s+='<circle cx="50" cy="21" r="4" fill="'+(l.plume||"#c8372d")+'"/><path d="M60 15 Q78 -6 92 8 Q76 6 68 24Z" fill="'+(l.plume||"#c8372d")+'"/>';
+  }
+  if(hat==="sombrero"||hat==="straw"){
+    const hc=l.hatc||"#d8bf7a", br=hat==="straw"?40:46;
+    s+='<ellipse cx="50" cy="31" rx="'+br+'" ry="8" fill="'+hc+'"/><path d="M33 31 Q34 10 50 10 Q66 10 67 31Z" fill="'+hc+'"/><rect x="33" y="24" width="34" height="4.5" fill="'+(l.band||"#6a3b20")+'"/><ellipse cx="50" cy="31" rx="'+br+'" ry="8" fill="none" stroke="rgba(0,0,0,.25)" stroke-width="1.2"/>';
+  }
+  if(hat==="cap") s+='<path d="M30 33 Q50 6 70 33Z" fill="'+(l.hatc||"#5b4a35")+'"/><circle cx="50" cy="19" r="3.2" fill="#ffd966"/>';
+  if(hat==="rebozo"){
+    const sh=l.shawl||"#7b2a3b";
+    s+='<path d="M24 54 Q20 10 50 10 Q80 10 76 54 Q73 30 50 29 Q27 30 24 54Z" fill="'+sh+'"/><path d="M14 100 Q16 72 38 72 L38 100Z M86 100 Q84 72 62 72 L62 100Z" fill="'+sh+'"/>';
+  }
+  s+='</g><circle cx="50" cy="50" r="48" fill="none" stroke="rgba(20,33,61,.35)" stroke-width="2"/>';
+  return s;
+}
+function svgFace(l){ return '<svg class="pt" viewBox="0 0 100 100" aria-hidden="true">'+face(l)+'</svg>'; }
+
+/* =====================================================
+   PERSONAJES: históricos (real:true) y representativos (ficticios)
+   ===================================================== */
+const CH = {
+ iturbide:{n:"Agustín de Iturbide",r:"Jefe del Ejército Trigarante (1783–1824)",p:"Ciudad de México",y:"1821",real:true,
+   look:{skin:"#e4b592",hair:"#2a1c15",hs:"side",out:"uniform",cloth:"#1f3b73",hat:"bicorne",plume:"#2f8f5a",bg:"#e8d9b8"},pan:[
+   {c:"24 de febrero de 1821: el Plan de Iguala propone un México independiente, católico y con unión entre españoles y americanos."},
+   {c:"27 de septiembre de 1821: el Ejército Trigarante entra a la Ciudad de México y se consuma la independencia."},
+   {c:"México nace con el mapa heredado de la Nueva España, pero sin haber construido aún el Estado que lo gobierne. En 1822 Iturbide sería proclamado emperador.",fx:"INICIO DEL JUEGO"}]},
+ odonoju:{n:"Juan O'Donojú",r:"Último jefe político superior de la Nueva España (1762–1821)",p:"Córdoba, Veracruz",y:"1821",real:true,
+   look:{skin:"#e8c1a2",hair:"#d8d4cc",hs:"side",out:"uniform",cloth:"#1c2f55",sash:"#b3302a",fh:"must",bg:"#e8d9b8"},pan:[
+   {c:"24 de agosto de 1821: firma con Iturbide los Tratados de Córdoba, que reconocen la independencia de México."},
+   {c:"Murió el 8 de octubre de 1821, pocas semanas después de la consumación de la independencia."},
+   {c:"Con su firma se cerró el dominio español sobre el territorio que México heredaría.",fx:"FIN DE UNA ÉPOCA"}]},
+ filisola:{n:"Vicente Filísola",r:"General del ejército mexicano en Guatemala (1785–1850)",p:"Ciudad de Guatemala",y:"1823",real:true,
+   look:{skin:"#e0b08c",hair:"#3a2a20",hs:"side",out:"uniform",cloth:"#22406e",fh:"must",bg:"#dfe9d8"},pan:[
+   {c:"En 1822 las provincias de la antigua Capitanía General de Guatemala se unieron al Imperio mexicano; Filísola estuvo al frente de las fuerzas mexicanas."},
+   {c:"Tras la caída de Iturbide (marzo de 1823), convocó a un congreso que el 1 de julio de 1823 declaró la independencia de Centroamérica."},
+   {c:"Retiró las tropas mexicanas. Fue la primera y mayor pérdida territorial de México, antes de cumplir tres años de vida.",fx:"ADIÓS, CENTROAMÉRICA"}]},
+ diputado:{n:"Diputado de la Junta de Chiapas",r:"Representante local (personaje representativo)",p:"Ciudad Real, Chiapas",y:"1824",real:false,
+   look:{skin:"#c58c63",hair:"#1c1410",hs:"short",out:"suit",cloth:"#33302c",tie:"#e6e1d3",fh:"must",bg:"#dfe9d8"},pan:[
+   {c:"Chiapas, 1824. La Junta General debe decidir si el territorio se une a México o a Centroamérica."},
+   {w:"Diputado",t:"Los pueblos ya mandaron sus votos. La mayoría quiere unirse a México."},
+   {w:"Diputado",t:"No todos están de acuerdo, pero esta vez el mapa se decide votando y no a cañonazos."},
+   {c:"Chiapas es de las pocas piezas que se suman por consulta y no por la fuerza.",fx:"¡SE QUEDA!"}]},
+ tomasa:{n:"Tomasa",r:"Cacaotera del Soconusco (personaje representativo)",p:"Soconusco",y:"1824",real:false,
+   look:{skin:"#b97c55",hair:"#1a1210",hs:"none",out:"peasant",cloth:"#efe7d5",hat:"rebozo",shawl:"#7b2a3b",female:true,bg:"#dfe9d8"},pan:[
+   {c:"Soconusco, 1824. Mientras Centroamérica se separa, esta región queda en el limbo."},
+   {w:"Tomasa",t:"Mi cacao se vende hacia Guatemala, pero el cura dice que somos de México. ¿A qué autoridad le pago?"},
+   {w:"Vecino",t:"Nadie nos preguntó, Tomasa. Por ahora estamos «en disputa»."},
+   {c:"El Soconusco se incorporará de forma definitiva hasta 1842; el pleito se cerrará con el tratado de 1882.",fx:"EN DISPUTA"}]},
+ ramos:{n:"Miguel Ramos Arizpe",r:"Sacerdote y diputado por Coahuila (1775–1843)",p:"Coahuila",y:"1824",real:true,
+   look:{skin:"#e0ae8b",hair:"#3a3029",hs:"bald",out:"cassock",cloth:"#17171c",glasses:true,bg:"#ead9c2"},pan:[
+   {c:"Fue uno de los grandes impulsores del federalismo en el Congreso Constituyente de 1823–1824; se le conoce como «padre del federalismo mexicano»."},
+   {c:"El Acta Constitutiva (31 de enero de 1824) y la Constitución (4 de octubre de 1824) fijaron el tablero: 19 estados, 4 territorios y 1 Distrito Federal."},
+   {c:"El decreto del 7 de mayo de 1824 unió Coahuila y Tejas en un solo estado, hasta que Texas tuviera población suficiente para ser estado propio.",fx:"ERROR DEL SISTEMA"}]},
+ victoria:{n:"Guadalupe Victoria",r:"Primer presidente de México, 1824–1829 (1786–1843)",p:"Ciudad de México",y:"1824",real:true,
+   look:{skin:"#c9916a",hair:"#1b130e",hs:"long",out:"uniform",cloth:"#245a3c",sash:"#c8372d",medal:true,bg:"#e8d9b8"},pan:[
+   {c:"Fue el primer presidente de la República federal, bajo la Constitución de 1824."},
+   {c:"Su gobierno recibió un territorio enorme, poco poblado y un Estado endeudado: en 1824 y 1825 México contrató préstamos con bancos británicos."},
+   {c:"Bajo su presidencia, la Ley de Colonización de 1824 abrió la puerta a familias extranjeras en la frontera norte.",fx:"NUEVO PERSONAJE"}]},
+ austin:{n:"Stephen F. Austin",r:"Empresario colonizador de Texas (1793–1836)",p:"San Felipe de Austin, Texas",y:"1821–1835",real:true,
+   look:{skin:"#efc9a8",hair:"#3b2a1f",hs:"side",out:"suit",cloth:"#2b2f3a",tie:"#f1efe6",bg:"#e4e8f2"},pan:[
+   {c:"En 1821 comenzó a traer familias angloamericanas a Texas; el gobierno mexicano confirmó su concesión y la de sus colonos en 1823."},
+   {c:"Los colonos juraron lealtad y recibieron tierra a cambio de respetar las leyes mexicanas, incluida la religión católica."},
+   {c:"En 1834–1835 estuvo preso casi dos años en México por sus gestiones políticas; regresó a Texas convencido de que había que defender los derechos de los colonos.",fx:"EFECTO DOMINÓ"}]},
+ santaanna36:{n:"Antonio López de Santa Anna",r:"Presidente de México (1794–1876)",p:"San Jacinto, Texas",y:"1836",real:true,
+   look:{skin:"#d9a784",hair:"#1c1410",hs:"side",out:"uniform",cloth:"#1b3a7a",hat:"bicorne",plume:"#c8372d",medal:true,bg:"#e4cfae"},pan:[
+   {c:"Desde 1835 impulsó un régimen centralista que acabó con el federalismo y con la autonomía de los estados."},
+   {c:"Venció a los texanos en El Álamo (6 de marzo de 1836), pero el 21 de abril fue derrotado y capturado en San Jacinto."},
+   {c:"Prisionero, firmó los Tratados de Velasco (14 de mayo de 1836), que el gobierno mexicano no reconoció. Texas fue independiente de facto durante 9 años.",fx:"SAN JACINTO"}]},
+ navarro:{n:"José Antonio Navarro",r:"Tejano de San Antonio (1795–1871)",p:"San Antonio de Béxar",y:"1836",real:true,
+   look:{skin:"#c99770",hair:"#241913",hs:"side",out:"suit",cloth:"#2a2623",tie:"#f1efe6",fh:"must",bg:"#e4e8f2"},pan:[
+   {c:"Nació en San Antonio de Béxar cuando era parte de la Nueva España. Fue uno de los dos tejanos que firmaron la Declaración de Independencia de Texas en 1836."},
+   {c:"Los tejanos quedaron entre dos fuegos: su familia y su tierra estaban allí, pero la guerra los obligó a tomar partido."},
+   {c:"Más tarde participó en la vida política de la República de Texas y en la convención que preparó su ingreso a EE. UU.",fx:"ENTRE DOS PAÍSES"}]},
+ taylor:{n:"Zachary Taylor",r:"General de EE. UU. (1784–1850)",p:"Matamoros, Tamaulipas",y:"1846",real:true,
+   look:{skin:"#e4b999",hair:"#cfcac2",hs:"side",out:"uniform",cloth:"#2c3c63",bg:"#e4e8f2"},pan:[
+   {c:"En enero de 1846, por órdenes del presidente Polk, avanzó hasta el río Bravo, dentro de la franja disputada entre el Nueces y el Bravo."},
+   {c:"El 25 de abril de 1846, en el Incidente de Thornton, soldados mexicanos y estadounidenses chocaron en la franja; hubo muertos y heridos."},
+   {c:"EE. UU. usó el incidente para declarar la guerra (13 de mayo de 1846). Taylor ganó Palo Alto y Resaca de la Palma y ocupó Matamoros.",fx:"PRETEXTO"}]},
+ remigio:{n:"Remigio",r:"Ranchero de la Franja del Nueces (personaje representativo)",p:"Entre el Nueces y el Bravo",y:"1846",real:false,
+   look:{skin:"#bd8660",hair:"#1c1410",hs:"short",out:"peasant",cloth:"#efe7d5",hat:"sombrero",hatc:"#6b4b2c",band:"#a82f2f",fh:"must",bg:"#e4e8f2"},pan:[
+   {c:"Franja del Nueces, abril de 1846. Dos países dibujan la misma frontera en lugares distintos."},
+   {w:"Remigio",t:"Mi familia siempre pagó impuestos en Tamaulipas. Para México la frontera es el Nueces; para Washington, el Bravo."},
+   {w:"Remigio",t:"Hoy llegaron soldados de Taylor y se oyen balazos. Dicen que fue el Incidente de Thornton."},
+   {c:"El avance a la franja disputada sirvió de pretexto para la guerra formal.",fx:"¡PRETEXTO!"}]},
+ trist:{n:"Nicholas Trist",r:"Diplomático de EE. UU. (1800–1874)",p:"Villa de Guadalupe Hidalgo",y:"1848",real:true,
+   look:{skin:"#ebc4a3",hair:"#4a3a2e",hs:"side",out:"suit",cloth:"#202431",tie:"#111",bg:"#e4e8f2"},pan:[
+   {c:"Fue enviado por el presidente Polk como negociador de paz y llegó a México en 1847."},
+   {c:"Cuando Polk lo llamó de regreso, siguió negociando por su cuenta."},
+   {c:"El 2 de febrero de 1848 firmó en la Villa de Guadalupe Hidalgo el tratado: México cede Alta California y Nuevo México y recibe 15 millones de dólares.",fx:"TRATADO"}]},
+ penaypena:{n:"Manuel de la Peña y Peña",r:"Presidente interino de México (1789–1850)",p:"Querétaro",y:"1848",real:true,
+   look:{skin:"#e3b794",hair:"#d9d5cd",hs:"bald",out:"suit",cloth:"#222",tie:"#eee",bg:"#ead9c2"},pan:[
+   {c:"Con la capital ocupada por el ejército de EE. UU. (septiembre de 1847), el gobierno se trasladó a Querétaro, donde él asumió la presidencia interina."},
+   {c:"Su gobierno negoció el Tratado de Guadalupe-Hidalgo, que el Congreso mexicano ratificó en mayo de 1848."},
+   {c:"Firmar significó perder más de la mitad del territorio, pero también terminar la ocupación y conservar el resto del país.",fx:"SUPERVIVENCIA"}]},
+ ramon:{n:"Don Ramón",r:"Ranchero californiano (personaje representativo)",p:"Alta California",y:"1848",real:false,
+   look:{skin:"#c59068",hair:"#1b130e",hs:"short",out:"suit",cloth:"#4a3a2c",hat:"sombrero",hatc:"#1d1814",band:"#c9a03a",fh:"must",bg:"#f0dcc0"},pan:[
+   {c:"Alta California, 1848. El Tratado de Guadalupe-Hidalgo mueve la frontera; la gente se queda donde estaba."},
+   {w:"Don Ramón",t:"Yo no me mudé a ningún lado: la frontera se movió sobre mí."},
+   {w:"Don Ramón",t:"El tratado dice que respetarán mis tierras y que puedo elegir mi ciudadanía. Veremos si lo cumplen."},
+   {c:"México perdió más de la mitad de su territorio. En la práctica, muchos propietarios enfrentaron juicios largos y costosos para conservar sus tierras.",fx:"PERDIDO!"}]},
+ alvarez:{n:"Juan Álvarez",r:"Caudillo del sur y primer gobernador de Guerrero (1790–1867)",p:"Chilpancingo",y:"1849",real:true,
+   look:{skin:"#bf8660",hair:"#e0ddd6",hs:"side",out:"uniform",cloth:"#2d5a3e",fh:"must",bg:"#f0dcc0"},pan:[
+   {c:"Veterano de la guerra de Independencia, era la figura política y militar más fuerte de la Costa Chica y Tierra Caliente."},
+   {c:"En 1849 el Congreso creó el estado de Guerrero con territorios de México, Puebla y Michoacán, y Álvarez fue su primer gobernador."},
+   {c:"Años después encabezaría la Revolución de Ayutla (1854) contra Santa Anna y llegaría a la presidencia interina en 1855.",fx:"NUEVA PIEZA"}]},
+ pascual:{n:"Pascual",r:"Arriero de Tierra Caliente (personaje representativo)",p:"Sur del país",y:"1849",real:false,
+   look:{skin:"#b57a52",hair:"#1a1210",hs:"short",out:"peasant",cloth:"#efe7d5",hat:"straw",fh:"must",bg:"#f0dcc0"},pan:[
+   {c:"Sierra del sur, 1849. Cada trámite obliga a viajar a Toluca, a Puebla o a Morelia."},
+   {w:"Pascual",t:"Por un papel de tierras ando semanas de camino. Ahora dicen que van a crear un estado nuevo con pedazos de tres."},
+   {w:"Pascual",t:"Si la autoridad queda más cerca, tal vez los pleitos se arreglen antes de volverse guerra."},
+   {c:"Guerrero nace segregando partes de México, Puebla y Michoacán. No es una pérdida: es un reacomodo para gobernar mejor.",fx:"NUEVA PIEZA"}]},
+ santaanna53:{n:"Antonio López de Santa Anna",r:"Presidente de México por última vez, 1853–1855",p:"Ciudad de México",y:"1853",real:true,
+   look:{skin:"#d9a784",hair:"#bdb8b0",hs:"side",out:"uniform",cloth:"#1b3a7a",hat:"bicorne",plume:"#f1f1f1",medal:true,bg:"#e4cfae"},pan:[
+   {c:"Volvió al poder en abril de 1853 y terminó gobernando con el título de «Alteza Serenísima» y un fuerte control personal."},
+   {c:"El erario estaba exhausto y el país vivía amenazas fronterizas e intentos filibusteros en el norte."},
+   {c:"Aceptó el Tratado de La Mesilla (30 de diciembre de 1853): casi 77 mil km² por 10 millones de dólares.",fx:"DLC"}]},
+ gadsden:{n:"James Gadsden",r:"Ministro de EE. UU. en México (1788–1858)",p:"Tucson (parte de La Mesilla)",y:"1853",real:true,
+   look:{skin:"#efc9a8",hair:"#d4d0c8",hs:"side",out:"suit",cloth:"#2a2a33",tie:"#ddd",bg:"#e4e8f2"},pan:[
+   {c:"Fue enviado a México para negociar una frontera que permitiera trazar un ferrocarril hasta el Pacífico por el sur."},
+   {c:"Buscaba comprar mucho más territorio, incluso parte de Sonora y Baja California, pero la oposición mexicana y el Senado de EE. UU. redujeron el acuerdo."},
+   {c:"El resultado fue el último ajuste de la frontera norte actual; por eso la compra también se conoce como «Gadsden».",fx:"ÚLTIMO AJUSTE"}]},
+ dolores:{n:"Dolores",r:"Vecina de La Mesilla (personaje representativo)",p:"La Mesilla",y:"1853",real:false,
+   look:{skin:"#bc835d",hair:"#1a1210",hs:"none",out:"peasant",cloth:"#efe7d5",hat:"rebozo",shawl:"#2e6f8e",female:true,bg:"#f0dcc0"},pan:[
+   {c:"La Mesilla, 1853. Una franja más se vende para cubrir urgencias fiscales."},
+   {w:"Dolores",t:"Mi familia se mudó aquí hace unos años para seguir siendo mexicana, cuando la frontera pasó más al norte."},
+   {w:"Dolores",t:"Y ahora la frontera nos volvió a alcanzar. ¿Hasta dónde habrá que correr?"},
+   {c:"Mesilla fue fundada por familias mexicanas que dejaron el lado que pasó a EE. UU. en 1848; en 1853 la frontera las alcanzó de nuevo.",fx:"DLC"}]},
+ comonfort:{n:"Ignacio Comonfort",r:"Presidente de México, 1855–1858 (1812–1863)",p:"Ciudad de México",y:"1857",real:true,
+   look:{skin:"#dfae88",hair:"#2a1d16",hs:"side",out:"suit",cloth:"#262833",tie:"#111",fh:"must",bg:"#e8d9b8"},pan:[
+   {c:"Presidió el gobierno que convocó al Congreso Constituyente de 1856–1857, tras la Revolución de Ayutla."},
+   {c:"Juró la Constitución el 5 de febrero de 1857. Su Artículo 43 enlista a los estados de la federación."},
+   {c:"Meses después dio un autogolpe (diciembre de 1857) y el país entró en la Guerra de Reforma: el punto de guardado quedó, aunque el juego se puso difícil.",fx:"PUNTO SALVADO"}]},
+ arriaga:{n:"Ponciano Arriaga",r:"Jurista y diputado constituyente (1811–1865)",p:"San Luis Potosí",y:"1856–1857",real:true,
+   look:{skin:"#d7a47f",hair:"#2a1d16",hs:"side",out:"suit",cloth:"#2d2b2b",tie:"#eee",glasses:true,bg:"#e8d9b8"},pan:[
+   {c:"Potosino, presidió la comisión encargada de redactar el proyecto de Constitución en el Congreso de 1856–1857."},
+   {c:"En un voto particular criticó la concentración de la tierra en pocas manos."},
+   {c:"El proyecto fijó el mapa federal en una lista de estados: la fotografía territorial del país.",fx:"ART. 43"}]},
+ vidaurri:{n:"Santiago Vidaurri",r:"Gobernador de Nuevo León (1808–1867)",p:"Monterrey",y:"1856",real:true,
+   look:{skin:"#d9a784",hair:"#24180f",hs:"side",out:"suit",cloth:"#36322d",tie:"#9a2a2a",fh:"beard",bg:"#e8d9b8"},pan:[
+   {c:"Gobernador de Nuevo León desde 1855, fue un jefe regional con fuerza militar propia."},
+   {c:"En febrero de 1856 decretó la unión de Nuevo León y Coahuila bajo un solo gobierno; el experimento duró hasta 1864."},
+   {c:"Su poder regional chocó con el gobierno federal: el error administrativo se deshizo.",fx:"ERROR"}]},
+ chi:{n:"Cecilio Chi",r:"Líder maya de Tepich (?–1848)",p:"Tepich, Yucatán",y:"1847",real:true,
+   look:{skin:"#b57a52",hair:"#1a1210",hs:"short",out:"peasant",cloth:"#f3eee0",hat:"straw",fh:"must",bg:"#dfe9d8"},pan:[
+   {c:"En julio de 1847 encabezó el ataque a Tepich, que marcó el inicio de la Guerra de Castas."},
+   {c:"Los mayas se alzaron por la pérdida de tierras, los impuestos y el trabajo forzado."},
+   {c:"Murió en 1848. El conflicto duró décadas y dejó la mitad oriental de la península fuera del control del gobierno.",fx:"GUERRA DE CASTAS"}]},
+ pat:{n:"Jacinto Pat",r:"Líder maya de Tihosuco (?–1849)",p:"Tihosuco, Yucatán",y:"1847–1848",real:true,
+   look:{skin:"#b07650",hair:"#1a1210",hs:"short",out:"peasant",cloth:"#f3eee0",hat:"straw",bg:"#dfe9d8"},pan:[
+   {c:"Dirigente maya de Tihosuco; junto con Cecilio Chi organizó la sublevación de 1847."},
+   {c:"En 1848 los mayas casi llegaron a Mérida; el gobierno de Yucatán, desesperado, ofreció su soberanía a España, Gran Bretaña y EE. UU. a cambio de ayuda."},
+   {c:"Pat murió asesinado en 1849. Yucatán, dividido y en guerra, estuvo cerca de desprenderse del país.",fx:"CAOS"}]},
+ marta:{n:"Marta",r:"Comerciante de Campeche (personaje representativo)",p:"Campeche",y:"1858–1863",real:false,
+   look:{skin:"#b9805a",hair:"#1a1210",hs:"none",out:"peasant",cloth:"#efe7d5",hat:"rebozo",shawl:"#8a3a2a",female:true,bg:"#dfe9d8"},pan:[
+   {c:"Campeche, 1863. El Congreso reconoce lo que ya era un hecho."},
+   {w:"Marta",t:"Desde 1858 nos gobernamos aparte de Mérida. Hoy dejamos de ser un pedazo de Yucatán."},
+   {w:"Marta",t:"Para ellos es una pérdida; para el país, una pieza más en el rompecabezas."},
+   {c:"Yucatán pierde Campeche, pero el territorio sigue dentro de México.",fx:"NUEVA PIEZA"}]},
+ juarez:{n:"Benito Juárez",r:"Presidente de México (1806–1872)",p:"Ciudad de México",y:"1869",real:true,
+   look:{skin:"#b98660",hair:"#14100e",hs:"short",out:"suit",cloth:"#17171a",tie:"#0c0c0c",bg:"#e8d9b8"},pan:[
+   {c:"Zapoteca nacido en Oaxaca, presidió la República durante la Guerra de Reforma y la Intervención francesa."},
+   {c:"En 1869, ya en la República Restaurada, el gobierno creó los estados de Hidalgo (16 de enero) y Morelos (17 de abril), separándolos del Estado de México."},
+   {c:"No fueron pérdidas: fueron piezas nuevas dibujadas por el propio gobierno para gobernar mejor.",fx:"NUEVAS PIEZAS"}]},
+ esteban:{n:"Esteban",r:"Minero de Real del Monte (personaje representativo)",p:"Hidalgo",y:"1869",real:false,
+   look:{skin:"#b57a52",hair:"#1a1210",hs:"short",out:"peasant",cloth:"#8a7a63",hat:"cap",hatc:"#5b4a35",bg:"#e8d9b8"},pan:[
+   {c:"Real del Monte, 1869. Nace el estado de Hidalgo."},
+   {w:"Esteban",t:"Desde Toluca nos mandaban jueces y recaudadores que casi no conocían la sierra."},
+   {w:"Esteban",t:"Con un estado propio, el gobierno queda más cerca de las minas."},
+   {c:"Hidalgo nace separado del Estado de México.",fx:"NUEVA PIEZA"}]},
+ mariscal:{n:"Ignacio Mariscal",r:"Secretario de Relaciones Exteriores (1829–1910)",p:"Ciudad de México",y:"1882–1893",real:true,
+   look:{skin:"#e0ae8b",hair:"#d4d0c8",hs:"bald",out:"suit",cloth:"#222",tie:"#eee",fh:"beard",bg:"#e8d9b8"},pan:[
+   {c:"Oaxaqueño, fue diplomático durante los gobiernos de Juárez y de Porfirio Díaz, y canciller en varias ocasiones."},
+   {c:"Firmó en 1882 el tratado con Guatemala que fijó el límite definitivo y puso fin a la disputa por el Soconusco."},
+   {c:"En 1893 firmó el tratado con Gran Bretaña que fijó la frontera con Honduras Británica (hoy Belice).",fx:"CERRADO"}]},
+ aurelio:{n:"Aurelio",r:"Chiclero del Río Hondo (personaje representativo)",p:"Frontera con Belice",y:"1893",real:false,
+   look:{skin:"#b57a52",hair:"#1a1210",hs:"short",out:"peasant",cloth:"#e8dfca",hat:"sombrero",hatc:"#caa968",band:"#6a3b20",fh:"must",bg:"#dfe9d8"},pan:[
+   {c:"Río Hondo, 1893. Un tratado fija la línea con Honduras Británica (hoy Belice)."},
+   {w:"Aurelio",t:"Antes cortaba chicle sin saber de qué lado estaba. Ahora hay una línea… y papeles para cruzarla."},
+   {w:"Aurelio",t:"Dicen que en 1882 ya habían cerrado el límite con Guatemala. El sur ya tiene candados."},
+   {c:"Mariscal-Herrera (1882) y Mariscal-Spencer (1893) sellan las fronteras del sur.",fx:"CERRADO"}]},
+ cruz:{n:"Don Cruz",r:"Hortelano de El Chamizal (personaje representativo)",p:"Frontera Juárez–El Paso",y:"1890s",real:false,
+   look:{skin:"#b88058",hair:"#d0ccc4",hs:"short",out:"peasant",cloth:"#efe7d5",hat:"sombrero",hatc:"#e0cf9a",band:"#3a6b4a",fh:"must",bg:"#f0dcc0"},pan:[
+   {c:"Frontera norte, años 1890. El río Bravo cambió de curso y dejó un terreno sin dueño claro."},
+   {w:"Don Cruz",t:"Mi huerta estaba de este lado. Después de la creciente, ya nadie sabe de quién es."},
+   {w:"Don Cruz",t:"Los papeles dicen una cosa y el río dice otra."},
+   {c:"El conflicto de El Chamizal queda abierto: el siglo XIX no alcanza a cerrarlo, hasta 1963.",fx:"PENDIENTE"}]}
+};
+{ const real=Object.values(CH).filter(c=>c.real).length, tot=Object.keys(CH).length;
+  document.getElementById('nch').textContent=tot+" personajes ("+real+" históricos)"; }
+
+/* =====================================================
+   PRECUELA (comparaciones interactivas)
+   ===================================================== */
+const FRENTE = {
+  "Estructura":["Asambleas representativas y autonomía administrativa.","Recentralización del poder (Reformas Borbónicas de José de Gálvez) y sistema de castas."],
+  "Economía":["Comercio diversificado (norte) y plantación (sur). Frontera móvil.","Impuestos endurecidos para financiar las guerras de España (¡irónicamente, para apoyar la independencia de EE. UU.!)."],
+  "Detonante":["Reacción a gravámenes posteriores a la Guerra de los 7 Años (Ley del Timbre, Ley del Té): violación de su autogobierno.","Crisis dinástica y vacío de poder en la metrópoli (Abdicaciones de Bayona, 1808)."]
+};
+const DESTINOS = {
+  "1776":["EE. UU. declara su independencia.","Punto álgido del férreo control borbónico. Cero autonomía."],
+  "1783":["EE. UU. es reconocido como nación soberana en París.","La élite criolla apenas toma nota mental del «experimento» estadounidense como referente ideológico."],
+  "1821":["EE. UU. está en plena y agresiva expansión hacia el oeste (habiendo comprado Luisiana).","México apenas logra su independencia y comienza a armar su Estado."]
+};
+function duo(el,pair,ta,tb){
+  el.innerHTML='<div class="side us"><h3>'+ta+'</h3><p>'+pair[0]+'</p></div><div class="side mx"><h3>'+tb+'</h3><p>'+pair[1]+'</p></div>';
+}
+function segControl(id,data,onPick){
+  const box=document.getElementById(id), keys=Object.keys(data);
+  keys.forEach((k,i)=>{
+    const b=document.createElement('button'); b.textContent=k; b.setAttribute('aria-pressed',i===0);
+    b.onclick=()=>{ [...box.children].forEach(x=>x.setAttribute('aria-pressed',x===b)); onPick(data[k]); };
+    box.appendChild(b);
+  });
+  onPick(data[keys[0]]);
+}
+segControl('segF',FRENTE,p=>duo(document.getElementById('duoF'),p,"13 Colonias / EE. UU.","Nueva España / México"));
+segControl('segD',DESTINOS,p=>duo(document.getElementById('duoD'),p,"EE. UU.","México"));
+
+/* =====================================================
+   ATLAS: construcción del mapa
+   ===================================================== */
+const NS="http://www.w3.org/2000/svg";
+const gP=document.getElementById('pieces'), gS=document.getElementById('states'), gZ=document.getElementById('zones'),
+      gH=document.getElementById('hl'), gL=document.getElementById('labs'), gK=document.getElementById('stks'), gN=document.getElementById('pins');
+document.getElementById('bg').setAttribute('points',BG_LAND);
+
+const PTS={}, regEl=new Map(), stEl=new Map();
+let cur=0, subI=0, selKey=null, curSt={}, curYear=1821, namesOn=true;
+
+// Piezas históricas (color por nivel)
+Object.keys(RAW).forEach(id=>{
+  const pts=RAW[id].map(proj).join(" "), p=document.createElementNS(NS,'polygon');
+  p.setAttribute('points',pts); PTS[id]=pts;
+  const clickable=CLICK_MACRO.includes(id);
+  p.dataset.id=id; p.setAttribute('class','reg '+(clickable?'click':'nopt'));
+  if(clickable){
+    p.setAttribute('tabindex','0');
+    p.addEventListener('click',()=>pickMacro(id));
+    p.addEventListener('keydown',e=>{ if(e.key==='Enter'||e.key===' '){e.preventDefault();pickMacro(id);} });
+  }
+  (ZONE_IDS.includes(id)?gZ:gP).appendChild(p); regEl.set(id,p);
+});
+// Estados modernos (bordes finos, clic y texto)
+STATE_ORDER.forEach(id=>{
+  const pts=RAWS[id].map(proj).join(" "), p=document.createElementNS(NS,'polygon');
+  p.setAttribute('points',pts); PTS['s_'+id]=pts; p.setAttribute('class','st'); p.setAttribute('tabindex','0');
+  p.setAttribute('aria-label',ST[id].n);
+  p.addEventListener('click',()=>pickState(id));
+  p.addEventListener('keydown',e=>{ if(e.key==='Enter'||e.key===' '){e.preventDefault();pickState(id);} });
+  gS.appendChild(p); stEl.set(id,p);
+});
+
+/* Resalta el contorno exacto de la pieza elegida */
+function hilite(key){
+  gH.innerHTML='';
+  if(!key||!PTS[key]) return;
+  ['hlo','hli'].forEach(c=>{ const p=document.createElementNS(NS,'polygon'); p.setAttribute('points',PTS[key]); p.setAttribute('class',c); gH.appendChild(p); });
+}
+
+/* Estado de un estado moderno en el año del nivel */
+function stateStatus(id,Y){
+  const d=ST[id], ms=d.ms||DEF_MS;
+  let last=null; ms.forEach(m=>{ if(Y>=m[0]) last=m; });
+  if(last){
+    const isState=/^Estado/.test(last[1])||last[1]==="Estado propio";
+    return {exists:true,label:last[1],full:isState};
+  }
+  return {exists:false,label:d.bf||DEF_BF};
+}
+function pickState(id){
+  selKey='s_'+id; hilite(selKey);
+  const d=ST[id], s=stateStatus(id,curYear);
+  document.getElementById('tip').innerHTML='<b>'+d.n+'</b><span class="chip2 '+(s.exists?'yes':'no')+'">'+curYear+': '+s.label+'</span><span class="tp">'+d.t+'</span>';
+}
+function pickMacro(id){
+  selKey=id; hilite(id);
+  const v=curSt[id];
+  document.getElementById('tip').innerHTML='<b>'+NAMES[id]+'</b><span class="chip2 '+STCLS[v]+'">'+STX[v]+'</span><span class="tp">'+ZT[id]+'</span>';
+}
+function refreshTip(){
+  if(!selKey) return;
+  if(selKey.startsWith('s_')) pickState(selKey.slice(2));
+  else if(curSt[selKey]==='hidden'){ selKey=null; hilite(null); document.getElementById('tip').textContent='Toca un estado del mapa para leer su historia en este periodo.'; }
+  else pickMacro(selKey);
+}
+
+const tl=document.getElementById('tl'), segs=document.getElementById('segs');
+SC.forEach((s,i)=>{
+  const b=document.createElement('button'); b.className='chip'; b.textContent=s.k; b.setAttribute('role','tab');
+  b.onclick=()=>go(i,0); tl.appendChild(b);
+  segs.appendChild(document.createElement('i'));
+});
+
+function textEl(cls,x,y,lines,size){
+  const t=document.createElementNS(NS,'text'); t.setAttribute('class',cls); t.setAttribute('font-size',size);
+  lines.forEach((ln,k)=>{ const sp=document.createElementNS(NS,'tspan'); sp.setAttribute('x',x); sp.setAttribute('y',y+k*(size+2)); sp.textContent=ln; t.appendChild(sp); });
+  return t;
+}
+
+function go(i,s){
+  cur=i; subI=s||0;
+  const sc=SC[i], sub=sc.subs?sc.subs[subI]:null;
+  curSt=Object.assign({},B,sc.st||{},sub&&sub.st?sub.st:{});
+  curYear=(sub&&sub.yr)||sc.yr;
+
+  // colores de las piezas históricas
+  regEl.forEach((el,id)=>{
+    const clk=CLICK_MACRO.includes(id);
+    el.setAttribute('class','reg '+(clk?'click':'nopt')+(OV.has(id)?' ov':'')+' s-'+curSt[id]);
+  });
+  // estados que aún no existían: borde punteado blanco
+  stEl.forEach((el,id)=>{ el.setAttribute('class','st'+(stateStatus(id,curYear).exists?'':' no')); });
+
+  // etiquetas
+  gL.innerHTML='';
+  Object.keys(LABELS).forEach(id=>{
+    if(curSt[id]==='hidden') return;
+    const [lo,la,t,sz]=LABELS[id], [x,y]=P(lo,la); gL.appendChild(textEl('lab',x,y,[t],sz));
+  });
+  if(namesOn) Object.keys(STL).forEach(id=>{
+    const [lo,la,t,sz]=STL[id], [x,y]=P(lo,la); gL.appendChild(textEl('lab sm',x,y,[t],sz));
+  });
+
+  // stickers (metáforas de videojuego)
+  gK.innerHTML='';
+  const colors={warn:'#ff8a3d',ok:'#0f9aa8',info:'#3d5a9e',danger:'#c0392b'};
+  (sub&&sub.stk?sub.stk:sc.stk||[]).forEach(st=>{
+    const w=st.t.length*10.5+28, g=document.createElementNS(NS,'g');
+    g.setAttribute('transform','translate('+st.x+','+st.y+') rotate('+(st.r||0)+')');
+    g.innerHTML='<rect x="'+(-w/2+4)+'" y="-14" width="'+w+'" height="34" rx="5" fill="#14213d" opacity=".4"/>'+
+      '<rect x="'+(-w/2)+'" y="-18" width="'+w+'" height="34" rx="5" fill="'+colors[st.c]+'" stroke="#14213d" stroke-width="3"/>'+
+      '<text class="stk-t" y="6">'+st.t+'</text>';
+    gK.appendChild(g);
+  });
+
+  // pines con el retrato de cada personaje
+  const pins=(sc.pins||[]).concat(sub&&sub.pins?sub.pins:[]);
+  const ids=pins.map(p=>p.c);
+  gN.innerHTML='';
+  pins.forEach(p=>{
+    const c=CH[p.c], g=document.createElementNS(NS,'g'), [x,y]=P(p.ll[0],p.ll[1]);
+    g.setAttribute('class','pin'); g.setAttribute('transform','translate('+x+','+y+')');
+    g.setAttribute('tabindex','0'); g.setAttribute('role','button'); g.setAttribute('aria-label','Leer el cómic de '+c.n);
+    g.innerHTML='<circle class="ring" r="23"/><circle class="dot" r="23"/><svg x="-22" y="-22" width="44" height="44" viewBox="0 0 100 100">'+face(c.look)+'</svg><circle class="rim" r="23"/>';
+    g.addEventListener('click',()=>openChar(p.c,ids));
+    g.addEventListener('keydown',e=>{ if(e.key==='Enter'||e.key===' '){e.preventDefault();openChar(p.c,ids);} });
+    gN.appendChild(g);
+  });
+
+  // leyenda dinámica
+  const used=new Set(); Object.values(curSt).forEach(v=>{ if(v==='merged') v='mx'; if(v!=='hidden') used.add(v); });
+  const colorVar={mx:'--c-mx',sur:'--c-sur',mxnew:'--c-mxnew',glitch:'--c-glitch',lost:'--c-lost',usa:'--c-usa',tex:'--c-tex',other:'--c-other'};
+  document.getElementById('legend').innerHTML=Object.keys(LEG).filter(k=>used.has(k)).map(k=>{
+    const bg=k==='dispute'?'repeating-linear-gradient(45deg,#0f9aa8 0 5px,#ff8a3d 5px 10px)':'var('+colorVar[k]+')';
+    return '<span><i style="background:'+bg+'"></i>'+LEG[k]+'</span>';
+  }).join('');
+
+  // HUD y línea de tiempo
+  document.getElementById('lvl').textContent='NIVEL '+(i+1)+'/'+SC.length;
+  [...segs.children].forEach((q,k)=>q.classList.toggle('on',k<=i));
+  [...tl.children].forEach((b,k)=>b.setAttribute('aria-current',k===i));
+  const act=tl.children[i];
+  tl.scrollTo({left:act.offsetLeft-tl.clientWidth/2+act.clientWidth/2,behavior:'smooth'});
+
+  // sub-botones
+  const subs=document.getElementById('subs'); subs.innerHTML='';
+  if(sc.subs){
+    sc.subs.forEach((sb,k)=>{
+      const b=document.createElement('button'); b.textContent=sb.k; b.setAttribute('aria-pressed',k===subI);
+      b.onclick=()=>go(i,k); subs.appendChild(b);
+    });
+  }
+
+  // tarjeta del nivel
+  const html='<span class="gamebadge">'+sc.game+'</span>'+
+    '<span class="badge b-'+sc.tipo+'">'+TIPOS[sc.tipo]+'</span>'+
+    '<h3>'+sc.title+'</h3><p class="sc-text">'+sc.text+'</p>'+
+    '<div class="note dec"><b>Decisión geopolítica clave</b>'+sc.dec+'</div>'+
+    (sc.crit?'<div class="note crit"><b>Dato crítico</b>'+sc.crit+'</div>':'')+
+    '<div class="chars"><p>Personajes de este nivel (toca para leer su historia):</p><div class="charbtns">'+
+      ids.map(id=>'<button data-c="'+id+'"><span class="e">'+svgFace(CH[id].look)+'</span>'+CH[id].n+'</button>').join('')+
+    '</div></div>';
+  const card=document.getElementById('scene'); card.innerHTML=html;
+  card.querySelectorAll('.charbtns button').forEach(b=>b.onclick=()=>openChar(b.dataset.c,ids));
+
+  document.getElementById('prev').disabled=(i===0);
+  document.getElementById('next').disabled=(i===SC.length-1);
+  refreshTip();
+}
+document.getElementById('prev').onclick=()=>{ if(cur>0) go(cur-1,0); };
+document.getElementById('next').onclick=()=>{ if(cur<SC.length-1) go(cur+1,0); };
+document.getElementById('tgNames').onclick=function(){
+  namesOn=!namesOn; this.setAttribute('aria-pressed',namesOn); this.textContent='Nombres de estados: '+(namesOn?'sí':'no'); go(cur,subI);
+};
+
+/* =====================================================
+   HOJA DE CÓMIC
+   ===================================================== */
+const sheet=document.getElementById('sheet'), body=document.getElementById('sheetBody');
+let lastFocus=null;
+function openChar(id,list){
+  const c=CH[id], idx=list.indexOf(id);
+  lastFocus=document.activeElement;
+  let h='<div class="ch-h"><div class="big">'+svgFace(c.look)+'</div><div><h3>'+c.n+'</h3><p>'+c.r+'</p><p>'+c.p+' · '+c.y+'</p></div></div>';
+  h+='<span class="whob '+(c.real?'real':'fic')+'">'+(c.real?'Personaje histórico · hechos reales':'Personaje representativo (ficticio) · situación basada en hechos reales')+'</span>';
+  h+='<div class="comic">';
+  c.pan.forEach(p=>{
+    h+='<div class="panel">';
+    if(p.c) h+='<div class="cap">'+p.c+'</div>';
+    if(p.w) h+='<div class="say"><div class="av">'+svgFace(c.look)+'</div><div class="bub"><b>'+p.w+'</b>'+p.t+'</div></div>';
+    if(p.fx) h+='<div class="fx">'+p.fx+'</div>';
+    h+='</div>';
+  });
+  h+='</div><p class="fine">Retrato ilustrado: representación estilizada del personaje, no es un retrato fiel.</p>';
+  if(list.length>1){
+    h+='<div class="cnav"><button data-go="'+list[(idx-1+list.length)%list.length]+'">◀ Anterior</button><button data-go="'+list[(idx+1)%list.length]+'">Siguiente personaje ▶</button></div>';
+  }
+  body.innerHTML=h;
+  body.querySelectorAll('[data-go]').forEach(b=>b.onclick=()=>openChar(b.dataset.go,list));
+  sheet.classList.add('open'); sheet.querySelector('.sheet-card').scrollTop=0;
+  sheet.querySelector('.x').focus();
+}
+function closeSheet(){ sheet.classList.remove('open'); if(lastFocus&&lastFocus.focus) lastFocus.focus(); }
+sheet.addEventListener('click',e=>{ if(e.target.hasAttribute('data-close')) closeSheet(); });
+document.addEventListener('keydown',e=>{ if(e.key==='Escape'&&sheet.classList.contains('open')) closeSheet(); });
+
+/* =====================================================
+   JUEGO: pérdida externa vs. reacomodo interno
+   ===================================================== */
+const EV=[
+ {t:"Anexión de Texas a EE. UU.",y:"1845",a:"e",why:"Una potencia extranjera incorpora un territorio que México consideraba suyo, tras una rebelión y bajo presión expansionista."},
+ {t:"Creación del estado de Guerrero",y:"1849",a:"i",why:"El propio gobierno redibuja estados para gobernar mejor. El país no pierde territorio: lo reorganiza."},
+ {t:"Tratado de Guadalupe-Hidalgo",y:"1848",a:"e",why:"Cesión de Alta California y Nuevo México al término de una guerra con invasión extranjera."},
+ {t:"Campeche se separa de Yucatán",y:"1858–1863",a:"i",why:"Una pieza se separa de otra, pero ambas siguen dentro de México."},
+ {t:"Venta de La Mesilla",y:"1853",a:"e",why:"Venta de territorio a EE. UU. en un contexto de urgencia fiscal y de enorme desigualdad de poder."},
+ {t:"Nacen Hidalgo y Morelos",y:"1869",a:"i",why:"Se separan del Estado de México bajo la República Restaurada para mejorar la gobernabilidad."},
+ {t:"Fusión de Coahuila y Texas",y:"1824",a:"i",why:"Fue una decisión interna del Congreso por falta de población. Tuvo consecuencias externas después, pero el acto en sí fue un reacomodo interno."},
+ {t:"Unión temporal de Nuevo León y Coahuila",y:"1856–1864",a:"i",why:"Un experimento administrativo interno para simplificar el gobierno, que se deshizo en 1864."}
+];
+let order=[],gi=0,score=0;
+function shuffle(a){ for(let i=a.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); [a[i],a[j]]=[a[j],a[i]]; } return a; }
+function startGame(){ order=shuffle(EV.slice()); gi=0; score=0; renderGame(); }
+function renderGame(){
+  const el=document.getElementById('game');
+  if(gi>=order.length){
+    el.innerHTML='<div class="score">TABLERO COMPLETO</div><div class="q">Acertaste '+score+' de '+order.length+'</div>'+
+      '<p style="margin-top:8px">'+(score===order.length?'Distingues muy bien entre lo que se perdió por la fuerza y lo que se reacomodó por gobernabilidad.':'Repasa los niveles del atlas y vuelve a intentarlo: la diferencia entre pérdida externa y reacomodo interno es la clave del proyecto.')+'</p>'+
+      '<div class="fb" style="background:var(--bg)"><button id="again">Jugar de nuevo</button></div>';
+    document.getElementById('again').onclick=startGame; return;
+  }
+  const e=order[gi];
+  el.innerHTML='<div class="score">EVENTO '+(gi+1)+'/'+order.length+' · ACIERTOS '+score+'</div>'+
+    '<div class="yr">'+e.y+'</div><div class="q">'+e.t+'</div>'+
+    '<div class="ans"><button class="e" data-a="e">Pérdida externa</button><button class="i" data-a="i">Reacomodo interno</button></div>'+
+    '<div id="fb"></div>';
+  el.querySelectorAll('.ans button').forEach(b=>b.onclick=()=>{
+    const ok=b.dataset.a===e.a; if(ok) score++;
+    el.querySelectorAll('.ans button').forEach(x=>x.disabled=true);
+    document.getElementById('fb').innerHTML='<div class="fb '+(ok?'ok':'no')+'"><b>'+(ok?'¡Correcto!':'No exactamente.')+'</b> '+
+      (ok?'':'Era: '+(e.a==='e'?'pérdida externa. ':'reacomodo interno. '))+e.why+'<br><button id="nx">'+(gi+1<order.length?'Siguiente evento':'Ver resultado')+'</button></div>';
+    document.getElementById('nx').onclick=()=>{ gi++; renderGame(); };
+  });
+}
+
+/* Tema claro / oscuro */
+document.getElementById('theme').onclick=()=>{
+  const r=document.documentElement;
+  const dark=r.getAttribute('data-theme')==='dark'||(!r.getAttribute('data-theme')&&matchMedia('(prefers-color-scheme: dark)').matches);
+  r.setAttribute('data-theme',dark?'light':'dark');
+};
+
+go(0,0);
+startGame();
+{ const ms=document.getElementById('mapscroll'); ms.scrollLeft=(ms.scrollWidth-ms.clientWidth)/2; }
+</script>
+</body>
+</html>
